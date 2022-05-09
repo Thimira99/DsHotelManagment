@@ -1,0 +1,11 @@
+.main {
+    margin-left: 800px;
+}
+
+.main li {
+    margin-right: 3px;
+}
+
+.main li :hover {
+    background-color: slateblue;
+}
