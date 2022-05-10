@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import AdminNavbar from '../AdminNavbar/adminNavbar';
+import Sidebar from '../SideBar/Sidebar';
 
 function Home() {
     return (
         <div>
-            <AdminNavbar />
-            <h1>Home</h1>
+            <AdminNavbar/>
+            <Sidebar />
+            
         </div>
     )
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './login.css'
 
 function Login() {
     return (
-        <div>
+        <div className='login'>
             <Link to='/home'><button className='btn btn-primary'>Login</button></Link>
         </div>
     )
