@@ -1,0 +1,30 @@
+.viewButton button {
+    margin-left: 28rem;
+    width: 40%;
+}
+
+.mainForm {
+    margin-left: 29%;
+    margin-top: 2rem;
+    background-color: rgb(127, 127, 149);
+    width: 40%;
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+.mainForm label {
+    color: aliceblue;
+}
+
+.mainForm form {
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+.mainForm form :hover {
+    color: blue;
+}
+
+.submitButton {
+    margin-top: 1rem;
+}

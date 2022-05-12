@@ -6,7 +6,7 @@ import { MdSupervisorAccount } from "react-icons/md";
 function ClientNavbar() {
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+            <nav className="navbar navbar-expand-lg navbar-light bg-secondary">
                 <div className='navTopic'>
                     <div className='image'>
                         <MdSupervisorAccount />
@@ -18,13 +18,16 @@ function ClientNavbar() {
                     <div className='main'>
                         <ul className="navbar-nav">
                             <li className="nav-item active">
-                                <a className="nav-link" href="#">Home</a>
+                                <a className="nav-link" href="/home">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Bookings</a>
+                                <a className="nav-link" href="/bookings">Bookings</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Contact Us</a>
+                                <a className="nav-link" href="/viewBookings">View Booking</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/contactUs">Contact Us</a>
                             </li>
                         </ul>
                     </div>
