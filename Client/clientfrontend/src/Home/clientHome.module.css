@@ -1,0 +1,15 @@
+/* .mainPage {
+    background-image: url('../images/bgImage.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+} */
+
+h1 {
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 6rem 1rem 6rem;
+}
