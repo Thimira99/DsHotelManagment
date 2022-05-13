@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import ClientBooking from './ClientBooking/clientBooking';
 import ViewClientBooking from './ViewClientBooking/viewBooking';
 import ClientUpdate from './EditClient/clientUpdate';
+import register from './Login/register';
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
           <Route path='/viewBookings' component={ViewClientBooking} />
           <Route path='/edit/:id' component={ClientUpdate} />
           <Route path='/' exact component={ClientLogin} />
+
+          {/* Client register routes */}
+          <Route path='/JoinNow' component={register} />
+
           <Redirect to='/' />
 
         </Switch>
