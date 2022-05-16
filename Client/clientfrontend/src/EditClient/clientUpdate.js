@@ -3,6 +3,7 @@ import ClientNavbar from '../ClientNavbar/clientNavbar';
 import axios from 'axios';
 
 import { useParams } from 'react-router-dom';
+import { Form, Button, Table, Row, Col, Card } from 'react-bootstrap';
 
 
 
@@ -14,6 +15,7 @@ function ClientUpdate() {
     const [reservationType, setReservationType] = useState("");
     const [numberOfReservations, setNumberOfReservations] = useState();
     const [numberOfNights, setNumberOfNights] = useState();
+    const [roomPrice, setRoomPrice] = useState("");
 
 
     useEffect(() => {
@@ -23,6 +25,7 @@ function ClientUpdate() {
                 setReservationType(res.data.data.reservationType);
                 setNumberOfReservations(res.data.data.numberOfReservations);
                 setNumberOfNights(res.data.data.numberOfNights);
+                setRoomPrice(res.data.data.roomPrice)
             }).catch((error) => {
                 alert(error)
             })
@@ -31,6 +34,32 @@ function ClientUpdate() {
         getBookingById();
     }, [])
 
+    function handleSelectChange(event){
+        console.log("event",event.target.value)
+        if (event.target.value) {
+      
+            switch (event.target.value) {
+                case 'Standard':
+                    setRoomPrice("20000");
+                    break;
+    
+                case 'Deluxe':
+                    setRoomPrice("50000");
+                    break;
+    
+                case 'Luxury':
+                    setRoomPrice("90000");
+                    break;
+    
+    
+            }
+            
+        }
+        console.log(roomPrice)
+        setReservationType(event.target.value)
+    }
+    
+
     function updateDetails(e) {
         e.preventDefault();
 
@@ -38,7 +67,8 @@ function ClientUpdate() {
             customerName,
             reservationType,
             numberOfReservations,
-            numberOfNights
+            numberOfNights,
+            roomPrice
         }
 
 
@@ -69,62 +99,104 @@ function ClientUpdate() {
 
                 <div className='mainForm'>
                     <form onSubmit={updateDetails}>
-                        <div className="form-group md-6">
-                            <label for="customerName">Customer Name:</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="customerName"
-                                placeholder="Enter Name"
-                                value={customerName}
-                                onChange={(e) => {
-                                    setCustomerName(e.target.value);
-                                }} />
-                        </div>
-                        <div className="form-group">
-                            <label for="reservationType">Reservation Type:</label>
-                            <select
-                                id="reservationType"
-                                className="form-control"
-                                value={reservationType}
-                                onChange={(e) => {
-                                    setReservationType(e.target.value);
-                                }}>
-                                <option selected disabled>Choose...</option>
-                                <option>Standard</option>
-                                <option>Deluxe</option>
-                                <option>Luxury</option>
-                            </select>
-                        </div>
-                        <div className="form-group ">
-                            <label for="numberOfReservations">Number Of Reservations:</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                id="numberOfReservations"
-                                value={numberOfReservations}
-                                placeholder="Enter Number Of Reservations"
-                                onChange={(e) => {
-                                    setNumberOfReservations(e.target.value);
-                                }}
-                            />
-                        </div>
-                        <div className="form-group md-6">
-                            <label for="numberOfNights">Number Of Nights:</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                id="numberOfNights"
-                                placeholder="Enter Name"
-                                value={numberOfNights}
-                                onChange={(e) => {
-                                    setNumberOfNights(e.target.value);
-                                }}
-                            />
-                        </div>
-                        <div className='submitButton'>
-                            <button type="submit" className="btn btn-primary">Update</button>
-                        </div>
+                        <Row >
+                            <div className="form-group md-6">
+                                <label for="customerName">Customer Name:</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="customerName"
+                                    value={customerName}
+                                    placeholder="Enter Name"
+                                    onChange={(e) => {
+                                        setCustomerName(e.target.value);
+                                    }} />
+                            </div>
+
+                        </Row>
+
+                        <Row>
+
+                            <div className="form-group">
+                                <label for="reservationType">Reservation Type:</label>
+                                <select
+                                    id="reservationType"
+                                    className="form-control"
+                                    value={reservationType}
+                                    onChange={
+                                        handleSelectChange
+                                    }>
+                                    <option selected disabled>Choose...</option>
+                                    <option>Standard</option>
+                                    <option>Deluxe</option>
+                                    <option>Luxury</option>
+                                </select>
+                            </div>
+
+                        </Row>
+
+                        <Row>
+
+
+                            <div className="form-group ">
+                                <label for="numberOfReservations">Number Of Reservations:</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    value={numberOfReservations}
+                                    id="numberOfReservations"
+                                    placeholder="Enter Number Of Reservations"
+                                    onChange={(e) => {
+                                        setNumberOfReservations(e.target.value);
+                                    }}
+                                />
+                            </div>
+
+                        </Row>
+
+                        <Row>
+
+                            <div className="form-group md-6">
+                                <label for="numberOfNights">Number Of Nights:</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    id="numberOfNights"
+                                    value={numberOfNights}
+                                    placeholder="Enter Name"
+                                    onChange={(e) => {
+                                        setNumberOfNights(e.target.value);
+                                    }}
+                                />
+                            </div>
+
+                        </Row>
+
+                        <Row>
+                            <Col xs={2}>
+
+                                <div className='submitButton'>
+                                    <button type="submit" className="btn btn-primary">Update</button>
+                                </div>
+
+                            </Col>
+
+                            <Col xs={3}>
+
+
+                                <div className='submitButton'>
+                                    <button type="submit" className="btn btn-primary">PayNow</button>
+                                </div>
+                            </Col>
+
+                            <Col>
+                                <p style={{ "font-family": "Montserrat,Verdana,Helvetica,Arial,sans-serif", "font-size": "23px", "marginTop": "20px", "margin-left": "160px" }}>Rs {roomPrice}</p>
+
+                            </Col>
+
+
+                        </Row>
+
 
                     </form>
                 </div>

@@ -57,7 +57,7 @@ function ViewClientBooking() {
                                 <th scope="col">Reservation Type</th>
                                 <th scope="col">Number Of Reservation</th>
                                 <th scope="col">Number Of Nights</th>
-                                <th scope="col">Date/Time</th>
+                                <th scope="col">Room Price</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -72,7 +72,7 @@ function ViewClientBooking() {
                                             <td>{value.reservationType}</td>
                                             <td>{value.numberOfReservations}</td>
                                             <td>{value.numberOfNights}</td>
-                                            <td>{value.createdAt}</td>
+                                            <td>Rs {value.roomPrice}</td>
                                             <div className='actionButton'>
                                                 <td>
                                                     <a href={`edit/${value._id}`}>

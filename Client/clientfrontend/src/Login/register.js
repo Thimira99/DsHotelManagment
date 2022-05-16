@@ -33,7 +33,9 @@ class register extends Component {
             phoneNumberError: false,
             passwordError: false,
             birthdayError: false,
-            repasserr: false
+            repasserr: false,
+            checkboxChecked: false,
+            policy: false
 
 
 
@@ -61,10 +63,23 @@ class register extends Component {
         this.changecountryphonecodeHandler = this.changecountryphonecodeHandler.bind(this);
         this.formData = createRef();
 
+        this.handleChange = this.handleChange.bind(this);
+
 
 
 
     }
+
+    handleChange(evt) {
+        console.log(evt.target.checked)
+        if (evt.target.checked) {
+            this.state.policy = false
+        } else {
+            this.state.policy = true
+        }
+        this.setState({ checkboxChecked: evt.target.checked });
+    }
+
 
     changeFirstNameHandler = (event) => {
 
@@ -235,7 +250,9 @@ class register extends Component {
             //console.log("counxxx", getcon);
             this.setState({
                 countries: getcon
+                
             }, () => {
+                
                 //console.log("coun", this.state.countries);
             })
 
@@ -249,6 +266,7 @@ class register extends Component {
     componentDidMount() {
 
         this.Getdatas()
+        
 
 
     }
@@ -258,25 +276,26 @@ class register extends Component {
         console.log("inside add")
         event.preventDefault();
 
-        console.log("inside all 1", !this.formData.current.firstName.value)
-        console.log("inside all2", !this.formData.current.secondName.value)
-        console.log("inside all3", !this.formData.current.birthday.value)
-        console.log("inside all4", this.formData.current.country.value)
-        console.log("inside all5", !this.formData.current.email.value)
-        console.log("inside all6", !this.formData.current.phoneNumber.value)
-        console.log("inside all7", !this.formData.current.password.value)
-        console.log("inside all8", !this.formData.current.reEnterPassword.value)
+        // console.log("inside all 1", !this.formData.current.firstName.value)
+        // console.log("inside all2", !this.formData.current.secondName.value)
+        // console.log("inside all3", !this.formData.current.birthday.value)
+        // console.log("inside all4", this.formData.current.country.value)
+        // console.log("inside all5", !this.formData.current.email.value)
+        // console.log("inside all6", !this.formData.current.phoneNumber.value)
+        // console.log("inside all7", !this.formData.current.password.value)
+        // console.log("inside all8", !this.formData.current.reEnterPassword.value)
+        // console.log("inside all9", this.state.checkboxChecked)
 
 
-        const newClient ={
-            Title : this.formData.current.tittle.value,
-            customerFirstName:  this.formData.current.firstName.value,
-            customerSecondName : this.formData.current.secondName.value,
-            dateOfBirth : this.formData.current.birthday.value,
-            country : this.formData.current.country.value,
-            email : this.formData.current.email.value,
-            phoneNumber : this.formData.current.countryphonecode.value+this.formData.current.phoneNumber.value,
-            password : this.formData.current.reEnterPassword.value
+        const newClient = {
+            Title: this.formData.current.tittle.value,
+            customerFirstName: this.formData.current.firstName.value,
+            customerSecondName: this.formData.current.secondName.value,
+            dateOfBirth: this.formData.current.birthday.value,
+            country: this.formData.current.country.value,
+            email: this.formData.current.email.value,
+            phoneNumber: this.formData.current.countryphonecode.value + this.formData.current.phoneNumber.value,
+            password: this.formData.current.reEnterPassword.value
         }
 
         console.log(newClient)
@@ -285,55 +304,69 @@ class register extends Component {
             && this.formData.current.email.value && this.formData.current.phoneNumber.value && this.formData.current.countryphonecode.value &&
             this.formData.current.password.value && this.formData.current.reEnterPassword.value) {
 
-           if(this.formData.current.password.value==this.formData.current.reEnterPassword.value){
-               if(((this.formData.current.password.value).length)<10 && ((this.formData.current.password.value).length)>5){
+            if (this.formData.current.password.value == this.formData.current.reEnterPassword.value) {
+                if (((this.formData.current.password.value).length) < 10 && ((this.formData.current.password.value).length) > 5) {
+
+                    if (this.state.checkboxChecked) {
+                        const URL = 'http://localhost:8000/api/clientregister/post';
+                        axios.post(URL, newClient).then(() => {
+                            Swal.fire(
+                                'successful',
+                                'You have register',
+                                'success'
+                            )
+
+                        }).catch((error) => {
+                            alert(error);
+                        })
+
+                    }else{
+                        Swal.fire({
+                            title: 'Please read and agree to the Shangri-La Circle Terms Conditions, Privacy Policy and the Cookies Policy.',
+                            icon: 'warning',
+        
+        
+                            showCancelButton: false,
+                            showCloseButton: true
+                        })
+                    }
 
 
-                const URL = 'http://localhost:8000/api/clientregister/post';
-                axios.post(URL,newClient).then(()=>{
-                    Swal.fire(
-                        'successful',
-                        'You have register',
-                        'success'
-                      )
-
-                }).catch((error) => {
-                    alert(error);
-                })
 
 
-               }else{
+
+                } else {
+                    Swal.fire({
+                        title: 'Your password must contain at least 8 characters and max 10 characters',
+                        icon: 'warning',
+
+
+                        showCancelButton: false,
+                        showCloseButton: true
+                    })
+                }
+
+            } else {
                 Swal.fire({
-                    title: 'Your password must contain at least 8 characters and max 10 characters',
+                    title: 'Password does not match',
                     icon: 'warning',
-                    
-                    
+
+
                     showCancelButton: false,
                     showCloseButton: true
-                  })
-               }
-            
-           }else{
-            Swal.fire({
-                title: 'Password does not match',
-                icon: 'warning',
-                
-                
-                showCancelButton: false,
-                showCloseButton: true
-              })
-           }
+                })
+            }
 
         } else {
             console.log((this.formData.current.password.value).length)
             Swal.fire({
                 title: 'Some Fields are empty ',
                 icon: 'warning',
-                
-                
+
+
                 showCancelButton: false,
                 showCloseButton: true
-              })
+            })
 
         }
 
@@ -394,7 +427,7 @@ class register extends Component {
                                 <Col>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label>Second Name</Form.Label>
+                                        <Form.Label>Second Name*</Form.Label>
                                         <Form.Control type="text" placeholder="" value={this.state.secondName} onChange={this.changSecondNameHandler} name="secondName" />
 
                                         {this.state.secondNameError && <p style={{ "color": "#fe0017", "font-size": "small" }}>Please enter a secondName. </p>}
@@ -412,7 +445,7 @@ class register extends Component {
                                     <Col>
 
                                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                                            <Form.Label>Date of Birth</Form.Label>
+                                            <Form.Label>Date of Birth*</Form.Label>
                                             <Form.Control type="date" placeholder="" value={this.state.birthday} onChange={this.changeBirthdayHandler} name="birthday" />
 
                                             {this.state.birthdayError && <p style={{ "color": "#fe0017", "font-size": "small" }}>Please select your date of birth. </p>}
@@ -428,7 +461,7 @@ class register extends Component {
                                 <Col>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label>Country/Region</Form.Label>
+                                        <Form.Label>Country/Region*</Form.Label>
                                         <Form.Select aria-label="Default select example" value={this.state.country} name="country"
                                             onChange={
                                                 this.changeCountryHandler
@@ -458,7 +491,7 @@ class register extends Component {
                                 <Col>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label>Email</Form.Label>
+                                        <Form.Label>Email*</Form.Label>
                                         <Form.Control type="email" placeholder="" value={this.state.email} onChange={this.changeEmailHandler} name="email" />
                                         {this.state.emailError && <p style={{ "color": "#fe0017", "font-size": "small" }}>Please enter a valid Email. </p>}
                                     </Form.Group>
@@ -472,7 +505,7 @@ class register extends Component {
 
 
                             </Row>
-                            <Form.Label>Phone Number</Form.Label>
+                            <Form.Label>Phone Number*</Form.Label>
                             <Row>
                                 <Col xs={2} >
 
@@ -508,7 +541,7 @@ class register extends Component {
                                 <Col>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label>Password</Form.Label>
+                                        <Form.Label>Password*</Form.Label>
                                         <Form.Control type="password" placeholder="" value={this.state.password} onChange={this.changePasswordHandler} name="password" />
                                         {this.state.passwordError && <p style={{ "color": "#fe0017", "font-size": "small" }}>Password is a required field. </p>}
                                     </Form.Group>
@@ -522,7 +555,7 @@ class register extends Component {
                                 <Col>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label>Re-enter Password</Form.Label>
+                                        <Form.Label>Re-enter Password*</Form.Label>
                                         <Form.Control type="password" placeholder="" value={this.state.reEnterPassword} onChange={this.changeRePasswordHandler} name="reEnterPassword" />
                                         {this.state.repasserr && <p style={{ "color": "#fe0017", "font-size": "small" }}>Retype Password. </p>}
                                     </Form.Group>
@@ -532,11 +565,44 @@ class register extends Component {
 
                             </Row>
 
+                            <Row>
+                                <div style={{ "marginLeft": "1px" }} className="container.fluid p-3 my-80 bg-secondary text-gradient bg-opacity-10 ">
+                                    <p style={{ "font-family": "Montserrat,Verdana,Helvetica,Arial,sans-serif" , "font-size":"13px" }} >
+                                        With your consent, Shangri-La would like to use your name, email address, mobile phone number and other relevant contact information for direct marketing. Please tick the box(es) below if you would like to receive information about: <br></br>
+                                        <br></br>
+                                        Shangri-La’s hotels, products and services.
+                                        <br></br>
+                                        <br></br>
+
+                                        Shangri-La’s selected third party products and services for travel, transportation, retail, food and beverage, hotel accommodation, credit cards, financial and investment services, real estate, entertainment, publications, fashion and jewellery, leisure and sports, health and wellness, non-profit and charitable activities, telecommunications, social networking, media and public relations.
+
+                                        Shangri-La Circle membership monthly e-Statements, showing Points and the above marketing information.
+                                    </p>
+                                </div>
+                            </Row>
+
+                            <Row>
+                                <Col>
+
+                                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                                        <Form.Check type="checkbox" label="I have read and agree to the Shangri-La Circle Terms and Conditions , the Privacy Policy and the Cookies Policy." checked={this.state.checkboxChecked}
+                                            onChange={this.handleChange} />
+                                        {this.state.policy && <p style={{ "color": "#fe0017", "font-size": "small" }}>Please read and agree to the Shangri-La Circle Terms Conditions, Privacy Policy and the Cookies Policy. </p>}
+                                    </Form.Group>
+
+                                </Col>
 
 
-                            <Button size="sm" className="btn btn-secondary" variant="add" type="submit" disabled={this.state.disable}>
-                                Add
-                            </Button >
+                            </Row>
+
+                            <Row>
+
+                                <Button size="sm" className="btn btn-secondary" variant="add" type="submit" disabled={this.state.disable} style={{ "color": "#000000", "background": "#e0aa14", "font-size": "large", "marginTop": "5px" }}>
+                                    Add
+                                </Button >
+
+                            </Row>
+
 
 
                         </Form>
@@ -550,3 +616,6 @@ class register extends Component {
 }
 
 export default register;
+
+
+// AIzaSyCLidDSiGeSShg8PFyU-UN5TigLyOVfNQ0
