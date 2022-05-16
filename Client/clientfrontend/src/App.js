@@ -23,15 +23,14 @@ function App() {
           <Route path='/bookings' component={ClientBooking} />
           <Route path='/viewBookings' component={ViewClientBooking} />
           <Route path='/edit/:id' component={ClientUpdate} />
-          <Route path='/' exact component={ClientLogin} />
-          
+          <Route path='/login' component={ClientLogin}/>
 
           {/* Client register routes */}
           <Route path='/JoinNow' component={register} />
           <Route path='/maps' exact component={SimpleMap} />
           <Route path='/payement' exact component={PaymentGateWay} />
 
-          <Redirect to='/' />
+          <Redirect to='/login' />
 
         </Switch>
       </Router>
