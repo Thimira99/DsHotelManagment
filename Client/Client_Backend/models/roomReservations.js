@@ -23,6 +23,11 @@ const roomReservationSchema = new Schema({
         required:true,
         trim:true
     },
+    roomPrice:{
+        type:String,
+        required:true,
+        trim:true
+    },
    
 },{timestamps:true})
 

@@ -8,7 +8,18 @@ class ClientLogin extends Component {
 
         this.state = {
 
+            val: ''
         }
+        this.setNumberOfNights = this.setNumberOfNights.bind(this)
+    }
+
+ 
+
+    setNumberOfNights= (ev) => {
+        console.log(ev.target.value);
+
+        sessionStorage.setItem('LogStatus', ev.target.value);
+        
     }
 
 
@@ -18,7 +29,22 @@ class ClientLogin extends Component {
 
                 <a href='/home'><button className='btn btn-primary'>Home</button></a>
                 <a href='/JoinNow'><button className='btn btn-primary'>Join Now</button></a>
-                
+                <a href='/maps'><button className='btn btn-primary'>Maps</button></a>
+                <a href='/payement'><button className='btn btn-primary'>payement</button></a>
+
+                <form>
+
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="numberOfNights"
+                        placeholder="Enter Name"
+                        onChange={ 
+                            this.setNumberOfNights
+                        }
+                    />
+                </form>
+
             </div>
         )
 
