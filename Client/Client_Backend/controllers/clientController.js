@@ -67,10 +67,29 @@ const deleteClient = async(req,res)=>{
     
 }
 
+//  /**Login */
+const clientLogin =async (req,res)=>{
+    // let client1 = new clientRegistration (req.body);
+     const {email,password} =req.body;
+     clientRegistartion.findOne({email:email},(err,user)=>{
+         if(user){
+             if(password === user.password && email === user.email){
+                 return res.status(200).json({message:"Login successful!"})
+             }else{
+                 return res.status(400).json({error:"Invalid email or password!"})
+             }
+          }else{
+             return res.status(400).json({error:"Not registered!"})
+          }
+         })
+         console.log(clientRegistartion)
+ }
+ 
 
 module.exports={
     postClientRegistration,
     getAllClients,
     updateClient,
-    deleteClient
+    deleteClient,
+    clientLogin
 }
