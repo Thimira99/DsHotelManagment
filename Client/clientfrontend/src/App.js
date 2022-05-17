@@ -10,6 +10,10 @@ import ClientBooking from './ClientBooking/clientBooking';
 import ViewClientBooking from './ViewClientBooking/viewBooking';
 import ClientUpdate from './EditClient/clientUpdate';
 
+import StandardRoom from './StandardRoom/standardRoom';
+import DeluxeRoom from './DeluxeRoom/deluxeRoom';
+import VipRoom from './VIPRoom/vipRoom';
+
 import register from './Login/register';
 import SimpleMap from './Login/SimpleMap';
 import PaymentGateWay from './Login/PaymentGateWay';
@@ -21,9 +25,12 @@ function App() {
         <Switch>
           <Route path='/home' component={ClientHome} />
           <Route path='/bookings' component={ClientBooking} />
+          <Route path='/standardRoom' component={StandardRoom} />
+          <Route path='/deluxeRoom' component={DeluxeRoom} />
+          <Route path='/vipRoom' component={VipRoom} />
           <Route path='/viewBookings' component={ViewClientBooking} />
           <Route path='/edit/:id' component={ClientUpdate} />
-          <Route path='/login' component={ClientLogin}/>
+          <Route path='/login' component={ClientLogin} />
 
           {/* Client register routes */}
           <Route path='/JoinNow' component={register} />

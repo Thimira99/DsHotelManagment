@@ -23,34 +23,34 @@ function ClientBooking() {
         e.preventDefault();
 
         console.log("inside but", LoginStatus)
-        if (!LoginStatus) {
+        // if (!LoginStatus) {
 
-            Swal.fire({
-                title: 'direct to login page',
-                icon: 'warning',
+        //     Swal.fire({
+        //         title: 'direct to login page',
+        //         icon: 'warning',
 
 
-                showCancelButton: false,
-                showCloseButton: true
-            })
+        //         showCancelButton: false,
+        //         showCloseButton: true
+        //     })
 
-            return -1;
+        //     return -1;
+        // }
+        const newCustomer = {
+            customerName,
+            reservationType,
+            numberOfReservations,
+            numberOfNights,
+            roomPrice
         }
-            const newCustomer = {
-                customerName,
-                reservationType,
-                numberOfReservations,
-                numberOfNights,
-                roomPrice
-            }
-            const URL = 'http://localhost:8000/api/roomReservations/post';
-            axios.post(URL, newCustomer).then(() => {
-                alert("Cusomer Added")
-            }).catch((error) => {
-                alert(error);
-            })
+        const URL = 'http://localhost:8000/api/roomReservations/post';
+        axios.post(URL, newCustomer).then(() => {
+            alert("Cusomer Added")
+        }).catch((error) => {
+            alert(error);
+        })
 
-        
+
     }
 
     function handleSelectChange(event) {
