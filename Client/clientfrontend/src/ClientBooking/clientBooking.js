@@ -57,6 +57,7 @@ function ClientBooking() {
 
     }
 
+
     function handleSelectChange(event) {
         console.log("event", event.target.value)
         if (event.target.value) {
