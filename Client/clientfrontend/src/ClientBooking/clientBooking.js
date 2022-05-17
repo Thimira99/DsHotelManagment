@@ -2,7 +2,8 @@ import React, { Component, useState, useEffect } from 'react';
 import ClientNavbar from '../ClientNavbar/clientNavbar';
 import axios from 'axios';
 import { Form, Button, Table, Row, Col, Card } from 'react-bootstrap';
-import Swal from 'sweetalert2'
+import {  useHistory } from "react-router-dom"
+
 
 
 import './clientBooking.css';
@@ -10,6 +11,8 @@ import './clientBooking.css';
 
 
 function ClientBooking() {
+
+    const history = useHistory();
 
     const [customerName, setCustomerName] = useState("");
     const [reservationType, setReservationType] = useState("");
@@ -24,6 +27,7 @@ function ClientBooking() {
 
         console.log("inside but", LoginStatus)
         // if (!LoginStatus) {
+
 
         //     Swal.fire({
         //         title: 'direct to login page',
@@ -42,6 +46,10 @@ function ClientBooking() {
             numberOfReservations,
             numberOfNights,
             roomPrice
+
+            history.push("/login")
+            return -1;
+
         }
         const URL = 'http://localhost:8000/api/roomReservations/post';
         axios.post(URL, newCustomer).then(() => {

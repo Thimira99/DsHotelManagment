@@ -74,7 +74,8 @@ const clientLogin =async (req,res)=>{
      clientRegistartion.findOne({email:email},(err,user)=>{
          if(user){
              if(password === user.password && email === user.email){
-                 return res.status(200).json({message:"Login successful!"})
+                
+                 return res.status(200).json({message:"Login successful!",data:user})
              }else{
                  return res.status(400).json({error:"Invalid email or password!"})
              }

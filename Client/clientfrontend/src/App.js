@@ -37,7 +37,7 @@ function App() {
           <Route path='/maps' exact component={SimpleMap} />
           <Route path='/payement' exact component={PaymentGateWay} />
 
-          <Redirect to='/login' />
+          <Redirect to='/home' />
 
         </Switch>
       </Router>
