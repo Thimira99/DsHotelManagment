@@ -7,6 +7,7 @@ const Login = () => {
     const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -27,11 +28,13 @@ const Login = () => {
             window.alert("Login unsuccessful!")
         } else {
 
+            console.log(data)
             window.alert("Login successful!")
             history.push("/home")
             document.location.reload()
             sessionStorage.setItem('LogStatus', true);
             sessionStorage.setItem('Loguser', data.data.Title + ". " + data.data.customerSecondName);
+            sessionStorage.setItem('LogEmail', data.data.email);
 
 
         }

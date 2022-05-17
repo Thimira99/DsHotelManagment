@@ -13,6 +13,7 @@ import ClientUpdate from './EditClient/clientUpdate';
 import register from './Login/register';
 import SimpleMap from './Login/SimpleMap';
 import PaymentGateWay from './Login/PaymentGateWay';
+import emailService from './services/emailService';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           <Route path='/JoinNow' component={register} />
           <Route path='/maps' exact component={SimpleMap} />
           <Route path='/payement' exact component={PaymentGateWay} />
+          <Route path='/email' exact component={emailService} />
+
 
           <Redirect to='/home' />
 
