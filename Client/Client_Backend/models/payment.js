@@ -24,12 +24,12 @@ const paymentSchema = new Schema({
         trim:true
     },
     numberOfReservations:{
-        type:Number,
+        type:String,
         required:true,
         trim:true
     },
     numberOfNights:{
-        type:Number,
+        type:String,
         required:true,
         trim:true
     },

@@ -1,10 +1,10 @@
-const roomReservations = require('../models/roomReservations')
+const PyamentModel = require('../models/payment')
 
-/*Post room reservations */
-const postRoomReservations = async (req, res) => {
-    let newRoomReservation = new roomReservations(req.body);
+/*Post Pyament */
+const postPayment = async (req, res) => {
+    let paymentObject = new PyamentModel(req.body);
 
-    newRoomReservation.save((err) => {
+    paymentObject.save((err) => {
         if (err) {
             return res.status(400).json({
                 error: err
@@ -17,10 +17,10 @@ const postRoomReservations = async (req, res) => {
 
 }
 
-/*Get reservations */
-const getRoomReservations = async (req, res) => {
+/*Get Payment */
+const getPayment = async (req, res) => {
     try {
-        const data = await roomReservations.find()
+        const data = await PyamentModel.find()
         return res.status(200).send({ data: data })
     } catch (err) {
         return res.status(500).send({ err: err })
@@ -28,44 +28,44 @@ const getRoomReservations = async (req, res) => {
 
 }
 
-/*Update reservations */
+// /*Update reservations */
 
-const updateRoomReservations = async (req, res) => {
-    roomReservations.findByIdAndUpdate(
-        req.params.id,
-        {
-            $set: req.body
-        },
-        (err, Reservation) => {
-            if (err) {
-                return res.status(400).json({
-                    error: err
-                });
-            }
-            return res.status(200).json({
-                success: "Reservation details updated successfully!"
-            });
-        }
-    );
-};
+// const updateRoomReservations = async (req, res) => {
+//     roomReservations.findByIdAndUpdate(
+//         req.params.id,
+//         {
+//             $set: req.body
+//         },
+//         (err, Reservation) => {
+//             if (err) {
+//                 return res.status(400).json({
+//                     error: err
+//                 });
+//             }
+//             return res.status(200).json({
+//                 success: "Reservation details updated successfully!"
+//             });
+//         }
+//     );
+// };
 
-/*Delete Reservations */
-const deleteRoomReservations = async (req, res) => {
-    roomReservations.findByIdAndRemove(req.params.id).exec((err, deletedRoomReservation) => {
+/*Delete Pyament */
+const deletePayment = async (req, res) => {
+   PyamentModel.findByIdAndRemove(req.params.id).exec((err, deletedpayment) => {
         if (err) {
             return res.status(400).json({
-                message: "Couldn't delete the the reservation something is wrong!", deletedRoomReservation
+                message: "Couldn't delete the the reservation something is wrong!", deletedpayment
             });
         }
         return res.status(200).json({
-            success: "Reservation deleted successfully!", deletedRoomReservation
+            success: "Reservation deleted successfully!", deletedpayment
         });
     });
 };
 
-const getRoomReservationsById = async (req, res) => {
+const getPaymentById = async (req, res) => {
     try {
-        const data = await roomReservations.findById(req.params.id);
+        const data = await PyamentModel.findById(req.params.id);
         return res.status(200).json({ data: data })
     } catch (err) {
         return res.status(500).send({ err: err })
@@ -75,9 +75,8 @@ const getRoomReservationsById = async (req, res) => {
 
 
 module.exports = {
-    getRoomReservations,
-    postRoomReservations,
-    updateRoomReservations,
-    deleteRoomReservations,
-    getRoomReservationsById
+    getPayment,
+    postPayment,
+    deletePayment,
+    getPaymentById
 }
