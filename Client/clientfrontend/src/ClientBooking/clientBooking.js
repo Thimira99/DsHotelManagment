@@ -135,6 +135,32 @@ function ClientBooking() {
 
     }
 
+    function paymentRecord(e){
+
+        const paymentId = e.id;
+        const pyamentType="Pay Pal"
+        const pyamentStaus="A"
+
+        const newPayment = {
+            paymentId,
+            logEmail,
+            customerName,
+            reservationType,
+            numberOfReservations,
+            numberOfNights,
+            roomPrice,
+            pyamentType,
+            pyamentStaus
+        }
+        const URL = 'http://localhost:8000/api/payment/post';
+        axios.post(URL, newPayment).then(() => {
+            console.log("payment Added")
+        }).catch((error) => {
+            console.log(error)
+        })
+        
+    }
+
 
 
     return (
@@ -167,9 +193,12 @@ function ClientBooking() {
                                 onApprove={(data, actions) => {
                                     return actions.order.capture().then((details) => {
                                         if (details) {
+
+                                            paymentRecord(details);
+
                                             Swal.fire(
-                                                'successful',
-                                                'You have register',
+                                                'Payment Succsesfull',
+                                                'Pyament details send to '+logEmail,
                                                 'success'
                                             )
 
@@ -179,6 +208,13 @@ function ClientBooking() {
 
 
                                         } else {
+
+                                            const details={
+                                                id:"nun"
+                                            } 
+
+                                            paymentRecord(details);
+
 
                                             Swal.fire(
                                                 'successful',
