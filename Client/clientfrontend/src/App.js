@@ -25,7 +25,7 @@ function App() {
       <Router>
         <Switch>
           <Route path='/home' component={ClientHome} />
-          <Route path='/bookings' component={ClientBooking} />
+          <Route path='/bookings/:id' component={ClientBooking} />
           <Route path='/standardRoom' component={StandardRoom} />
           <Route path='/deluxeRoom' component={DeluxeRoom} />
           <Route path='/vipRoom' component={VipRoom} />
