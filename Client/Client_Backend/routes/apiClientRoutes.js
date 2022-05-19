@@ -1,8 +1,7 @@
 const express = require('express')
 const { getRoomReservations, postRoomReservations, updateRoomReservations, deleteRoomReservations, getRoomReservationsById } = require('../controllers/controllers')
-const { postClientRegistration, getAllClients, updateClient, deleteClient, clientLogin ,getfillter} = require('../controllers/clientController')
-const { getPayment,postPayment,deletePayment, getPaymentById } = require('../controllers/paymentController')
-
+const { postClientRegistration, getAllClients, updateClient, deleteClient, clientLogin, getfillter } = require('../controllers/clientController')
+const { getPayment, postPayment, deletePayment, getPaymentById } = require('../controllers/paymentController')
 
 const { getHotels, getHotelById } = require('../controllers/hotelController')
 
@@ -34,8 +33,8 @@ router.post("/login", clientLogin)
 router.post("/filter", getfillter)
 
 /*hotel Client routes */
-router.get("/client/get/hotels",getHotels)
-router.get("/client/getHotel/:id",getHotelById)
+router.get("/client/get/hotels", getHotels)
+router.get("/client/getHotel/:id", getHotelById)
 
 
 module.exports = router

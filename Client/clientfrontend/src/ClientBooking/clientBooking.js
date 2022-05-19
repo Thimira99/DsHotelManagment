@@ -393,6 +393,7 @@ console.log("hhhhh",hotelObject)
                         </Row>
 
                         <Row>
+                            <label for="numberOfNights">Dates:</label>
                             <DateRangePicker
 
                                 onChange={(value) => {
