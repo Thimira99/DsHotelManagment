@@ -74,8 +74,10 @@ export default class HotelManagement extends Component {
                               <p className="col md-3" style={{fontSize:'20px',marginLeft:'250px',marginTop:'-70px'}}>{hotels.description}</p> 
                              
                               <p className="col md-3" style={{fontSize:'20px',marginLeft:'250px',marginTop:'0px'}}><b>Location-:</b> Latitude: {hotels.latitude} Longitude: {hotels.longitude}</p> 
-                              <p><button className="btn btn-outline-success"  style={{fontSize:'20px',marginTop:'-70px',marginLeft:'670px'}}><a href='/bookings' style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}>Book Now</a></button></p>
+                              <p><button className="btn btn-outline-success"  style={{fontSize:'20px',marginTop:'-70px',marginLeft:'670px'}}><a href={`bookings/${hotels._id}`} style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}>Book Now</a></button></p>
                                 
+
+                              
                                 {/*
                                     <a className='btn btn-warning' href={`/edit/hotels/${hotels._id}`} style={{color:'black'}}>
                                         <i className='fas fa-edit'></i>
