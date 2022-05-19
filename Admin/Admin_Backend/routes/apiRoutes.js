@@ -1,6 +1,6 @@
 const express= require('express')
 const router = express.Router()
-const {getReservations,postReservations,updateReservations, deleteReservations} =  require('../controllers/controller')
+const {getReservations,postReservations,updateReservations, deleteReservations, getASpecificReservation} =  require('../controllers/controller')
 const { postHotels, getHotels, updateHotels, deleteHotels, getASpecificHotel } = require('../controllers/hotelController')
 const Reservations = require('../models/Reservations')
 const{AdminLogin , postUser } = require('../controllers/adminUser')
@@ -11,6 +11,7 @@ router.get("/reservations",getReservations)
 router.post("/reservations/post",postReservations)
 router.put("/reservations/update/:id",updateReservations)
 router.delete("/reservations/delete/:id",deleteReservations)
+router.get("/get/reservations/:id",getASpecificReservation)
 
 // User
 router.post("/user/post",postUser)

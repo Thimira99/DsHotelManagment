@@ -16,6 +16,7 @@ import HotelManagement from './pages/HotelManagement';
 import hotelDetails from './pages/hotelDetails';
 import createHotels from './pages/createHotels';
 import editHotels from './pages/editHotels';
+import reservationDetails from './pages/reservationDetails';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/home' component={Home} />
           <Route path='/login' exact component={Login} />
           <Route path='/roomManagement' exact component={RoomManagement} />
+          <Route path='/reservations/:id' exact component={reservationDetails}/>
           <Route path='/taxiManagement' exact component={TaxiManagement} />
           <Route path='/payment' exact component={Payment} />
           <Route path='/notification' exact component={Notification} />
