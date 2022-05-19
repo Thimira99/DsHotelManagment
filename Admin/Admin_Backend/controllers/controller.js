@@ -1,5 +1,5 @@
 const Reservations = require('../models/Reservations');
-
+const Payments = require("../models/payment")
 
 
 /*Post reservations*/
@@ -21,14 +21,36 @@ const postReservations= async(req,res)=>{
 
 /*Get reservations */
 const getReservations= async(req,res)=>{
-    try{
-        const data = await Reservations.find()
-        return res.status(200).send({data:data})
-    }catch(err){
-        return res.status(500).send({err:err})
-    }
+    Reservations.find().exec((err,rooms)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingRooms:rooms
+        });
+    });
     
 }
+
+//get a specific reservation by id
+const getASpecificReservation=async(req,res)=>{
+    let resId = req.params.id;
+    Reservations.findById(resId,(err,reservation)=>{
+        if(err){
+            return res.status(400).json({success:false,err});
+        }
+
+        return res.status(200).json({
+            success:true,
+            reservation
+        });
+    });
+
+}
+
 
 /*Update reservations */
 
@@ -65,11 +87,29 @@ const deleteReservations=async(req,res)=>{
     });
 };
 
+/*Get payments */
+const getPayments= async(req,res)=>{
+    Payments.find().exec((err,payments)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingPayments:payments
+        });
+    });
+    
+}
+
 module.exports={
     getReservations,
+    getASpecificReservation,
     postReservations,
     updateReservations,
-    deleteReservations
+    deleteReservations,
+    getPayments
 }
 
 //module.exports=postReservations;

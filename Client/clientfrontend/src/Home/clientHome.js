@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React,{Component} from 'react';
 import ClientNavbar from '../ClientNavbar/clientNavbar';
 import clientHomeCss from './clientHome.module.css';
 
@@ -10,8 +10,34 @@ import VIP from '../images/vip.jpg';
 import room from '../images/deluxeking1.jpg';
 import { Carousel } from 'react-bootstrap';
 
+import axios from 'axios'
 
-function ClientHome() {
+
+
+export default class HotelManagement extends Component {
+    constructor(props){
+        super(props);
+
+        this.state={
+            hotels:[]
+        };
+    }
+    componentDidMount(){
+        this.retrieveHotels();
+    }
+
+    retrieveHotels(){
+        axios.get("http://localhost:8000/api/client/get/hotels").then(res=>{
+            if(res.data.success){
+                this.setState({
+                    hotels:res.data.existingHotels
+                });
+                console.log(this.state.hotels)
+            }
+        });
+    }
+
+    render(){
     return (
         <div className={clientHomeCss.mainPage}>
 
@@ -28,35 +54,48 @@ function ClientHome() {
                 </div>
 
             </div>
-            <h1>Rooms</h1>
-            <div id='section2' className={clientHomeCss.cards}>
-                <div className="card" style={{ width: '20rem' }}>
-                    <img className="card-img-top" src={Standard} alt="Card image cap" />
-                    <div className="card-body">
-                        <h5 className="card-title">Standard Rooms</h5>
-                        <a href="/standardRoom" className="btn btn-primary">View Prices and Details</a>
-                    </div>
-                </div>
-                <div className="card" style={{ width: '20rem' }}>
-                    <img className="card-img-top" src={Deluxe} alt="Card image cap" />
-                    <div className="card-body">
-                        <h5 className="card-title">Deluxe Rooms</h5>
-                        <a href="/deluxeRoom" className="btn btn-primary">View Prices and Details</a>
-                    </div>
-                </div>
-                <div className="card" style={{ width: '20rem' }}>
-                    <img className="card-img-top" src={VIP} alt="Card image cap" />
-                    <div className="card-body">
-                        <h5 className="card-title">VIP Rooms</h5>
-                        <a href="/vipRoom" className="btn btn-primary">View Prices and Details</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
+            <h1>HOTELS</h1>
+            <div className='container'>
+            <table className="table table-hover" id='section2' style={{marginTop:'80px'}} >
+                        {this.state.hotels.map((hotels,index)=>(
+                            <tr>
+                            <td>
+                            <img
+                                    src={hotels.imageUrl}
+                                    alt={hotels.itemCode}
+                                    style={{
+                                    width:"300px",
+                                    height:"200px",
+                                    marginLeft:"-10px",
+                                    
+                                    }}
+                              /></td>
+                              <p className="col md-3" style={{fontSize:'24px',marginRight:'100px',marginTop:'70px',fontWeight:'bolder'}}>{hotels.hotelName}</p> <br/>
+                              <p className="col md-3" style={{fontSize:'20px',marginLeft:'250px',marginTop:'-70px'}}>{hotels.description}</p> 
+                             
+                              <p className="col md-3" style={{fontSize:'20px',marginLeft:'250px',marginTop:'0px'}}><b>Location-:</b> Latitude: {hotels.latitude} Longitude: {hotels.longitude}</p> 
+                              <p><button className="btn btn-outline-success"  style={{fontSize:'20px',marginTop:'-70px',marginLeft:'670px'}}><a href='/bookings' style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}>Book Now</a></button></p>
+                                
+                                {/*
+                                    <a className='btn btn-warning' href={`/edit/hotels/${hotels._id}`} style={{color:'black'}}>
+                                        <i className='fas fa-edit'></i>
+                                        &nbsp;EDIT
+                                    </a>
+                                    &nbsp;
+                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(hotels._id)} style={{ textDecoration: "none", color: "white" }}
+                                        >
+                                        <i className='fas fa-trash-alt'></i>
+                                        &nbsp;REMOVE
+                                    </a>
+                                </td> */}
+                                </tr>
+                        ))}
+                        </table>
+            
+            
+            
+        </div></div>
     )
+    
 }
-
-export default ClientHome;
+}

@@ -20,6 +20,12 @@ export const  SidebarData =  [
     },
 
     {
+        title: "Hotel Management",
+        icon:  <RoomServiceIcon/>,
+        link: "/hotelManagement" 
+    },
+
+    {
         title: "Taxi Management",
         icon:  <LocalTaxiIcon/>,
         link: "/taxiManagement" 

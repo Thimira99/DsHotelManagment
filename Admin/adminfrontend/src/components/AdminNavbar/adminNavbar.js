@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
 import './adminNavbar.css';
-
+import bg1 from '../../images/bg1.png'
 
 function AdminNavbar() {
     const [click,setClick]=useState(false);
@@ -20,6 +20,26 @@ function AdminNavbar() {
 useEffect(() =>{
     showButton();
 }, []);
+
+
+const [logStatus, setLoginStatus] = useState(false);
+    const [loguser, setLogUser] = useState("");
+
+
+    useEffect(() => {
+        console.log("sessionStorage.getItem('LogStatus')",
+            sessionStorage.getItem('LogStatus'));
+
+        const logStatus = sessionStorage.getItem('LogStatus') === 'true' ? true : false
+        const logUser = sessionStorage.getItem('Loguser')
+        console.log("zzz", logStatus)
+        setLoginStatus(logStatus)
+        setLogUser(logUser)
+
+
+
+
+    });
     window.addEventListener('resize', showButton);
     return (
         <>
@@ -27,7 +47,7 @@ useEffect(() =>{
          <div className='navbar-container'>
             
             <Link to="/" className="navbar-logo" onClick = {closeMobileMenu}>
-            <img  style={{width:20}} class=" " src="" alt="" />  ADMIN PANEL</Link>
+            <img  style={{width:50}} class="" src={bg1} alt="bg1" />  ADMIN PANEL</Link>
               
             <div className = 'menu-icon' onClick= {handleClick}>
             
@@ -46,7 +66,15 @@ useEffect(() =>{
                 </Link>
             </li>
 
-            
+            {logStatus ?
+                                <><li className='nav-item'><p  className='nav-links' style={{ "color": "#0d6efd" }}>{loguser}</p></li>
+                                </>
+                               :
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/login">Login</a>
+                                </li>
+
+                            }
 
  
             </ul>
