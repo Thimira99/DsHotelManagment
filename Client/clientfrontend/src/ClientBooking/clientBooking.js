@@ -164,15 +164,15 @@ function ClientBooking() {
     }
 
     function handleSelect(e) {
-        console.log("inside date select",e)
+        console.log("inside date select", e)
         const firstDate = e ? e[0].toString() : false
 
-        if(firstDate){
-            let firstDates=firstDate.split(' ')
-            console.log("inside date select",firstDates[1])
+        if (firstDate) {
+            let firstDates = firstDate.split(' ')
+            console.log("inside date select", firstDates[1])
         }
-         
-        
+
+
     }
 
 
@@ -361,6 +361,7 @@ function ClientBooking() {
                         </Row>
 
                         <Row>
+                            <label for="numberOfNights">Dates:</label>
                             <DateRangePicker
 
                                 onChange={(value) => {
