@@ -14,11 +14,11 @@ import { Circle } from '@react-google-maps/api';
 const libraries = ['places', 'geometry'];
 const mapContainerStyle = {
   width: '100%',
-  height: '40vh',
+  height: '60vh',
 };
 const center = {
-  lat: 6.9271,
-  lng: 79.8612,
+  lat: 6.9108,
+  lng: 79.8634,
 };
 const options = {
   zoomControl: true,
@@ -59,7 +59,7 @@ export default function SimpleMap() {
         center={center}
        >
         <Circle center={center} options={circleOptions} />
-        {<Marker position={{ lat:6.932468, lng: 79.852703 }} />}
+        {<Marker position={{ lat:6.9108, lng: 79.8634 }} />}
       </GoogleMap>
     );
   };

@@ -7,6 +7,8 @@ import { Modal } from 'react-bootstrap';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from 'sweetalert2'
 import emailjs from "emailjs-com";
+import { DateRangePicker } from 'rsuite';
+import "rsuite/dist/rsuite.min.css";
 
 
 import './clientBooking.css';
@@ -25,7 +27,7 @@ function ClientBooking() {
     const [LoginStatus, setLoginStatus] = useState(false);
     const [show, setShow] = useState(false);
     const [logEmail, setEmail] = useState("");
-    const [logUser,setUser] = useState("");
+    const [logUser, setUser] = useState("");
 
     const handleClose = () => setShow(false);
 
@@ -117,15 +119,15 @@ function ClientBooking() {
             "email": logEmail,
             "message": "*This is an automated message. Please do not reply to this email address.",
             "paymentId": e.id,
-            "cusName":customerName,
-            "noDays":numberOfNights,
-            "noRes":numberOfReservations,
-            "roomType":reservationType,
-            "payment":roomPrice
-        
-    }
+            "cusName": customerName,
+            "noDays": numberOfNights,
+            "noRes": numberOfReservations,
+            "roomType": reservationType,
+            "payment": roomPrice
 
-    console.log("form", form)
+        }
+
+        console.log("form", form)
 
         emailjs.send('service_235yth9', 'template_bogl1qi', form, '5cBXRbMJXvJdnDsz1').then(res => {
             console.log("res", res)
@@ -135,11 +137,11 @@ function ClientBooking() {
 
     }
 
-    function paymentRecord(e){
+    function paymentRecord(e) {
 
         const paymentId = e.id;
-        const pyamentType="Pay Pal"
-        const pyamentStaus="A"
+        const pyamentType = "Pay Pal"
+        const pyamentStaus = "A"
 
         const newPayment = {
             paymentId,
@@ -158,9 +160,20 @@ function ClientBooking() {
         }).catch((error) => {
             console.log(error)
         })
-        
+
     }
 
+    function handleSelect(e) {
+        console.log("inside date select",e)
+        const firstDate = e ? e[0].toString() : false
+
+        if(firstDate){
+            let firstDates=firstDate.split(' ')
+            console.log("inside date select",firstDates[1])
+        }
+         
+        
+    }
 
 
     return (
@@ -198,7 +211,7 @@ function ClientBooking() {
 
                                             Swal.fire(
                                                 'Payment Succsesfull',
-                                                'Pyament details send to '+logEmail,
+                                                'Pyament details send to ' + logEmail,
                                                 'success'
                                             )
 
@@ -209,9 +222,9 @@ function ClientBooking() {
 
                                         } else {
 
-                                            const details={
-                                                id:"nun"
-                                            } 
+                                            const details = {
+                                                id: "nun"
+                                            }
 
                                             paymentRecord(details);
 
@@ -266,6 +279,10 @@ function ClientBooking() {
                 <div className='viewButton'>
                     <button className='btn btn-primary'>View Room Details</button>
                 </div>
+
+
+
+
 
 
 
@@ -340,6 +357,17 @@ function ClientBooking() {
                                     }}
                                 />
                             </div>
+
+                        </Row>
+
+                        <Row>
+                            <DateRangePicker
+
+                                onChange={(value) => {
+                                    handleSelect(value);
+                                }}
+
+                            />
 
                         </Row>
 

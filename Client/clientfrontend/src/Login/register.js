@@ -2,6 +2,7 @@ import { createRef, Component } from 'react';
 import './register.css';
 import { Form, Button, Table, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
+import { NavLink, useHistory } from "react-router-dom"
 
 import Swal from 'sweetalert2'
 
@@ -315,6 +316,8 @@ class register extends Component {
                                 'You have register',
                                 'success'
                             )
+
+                            this.props.history.push("/login")
 
                         }).catch((error) => {
                             alert(error);
