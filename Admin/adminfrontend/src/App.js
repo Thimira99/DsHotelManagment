@@ -4,7 +4,7 @@ import './components/SideBar/SideBar.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Login from './components/Login/login';
 import Home from './components/Home/home';
 import SideBar from './components/SideBar/Sidebar';
@@ -25,7 +25,7 @@ function App() {
       <Router>
         <Switch>
           <Route path='/home' component={Home} />
-          <Route path='/' exact component={Login} />
+          <Route path='/login' exact component={Login} />
           <Route path='/roomManagement' exact component={RoomManagement} />
           <Route path='/taxiManagement' exact component={TaxiManagement} />
           <Route path='/payment' exact component={Payment} />
@@ -34,6 +34,8 @@ function App() {
           <Route path='/hotels/:id' exact component={hotelDetails}/>
           <Route path='/add/hotels' exact component = {createHotels}/>
           <Route path='/edit/hotels/:id' exact component={editHotels}/>
+          
+          <Redirect to='/login'/>
         </Switch>
 
         

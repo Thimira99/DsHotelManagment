@@ -20,6 +20,26 @@ function AdminNavbar() {
 useEffect(() =>{
     showButton();
 }, []);
+
+
+const [logStatus, setLoginStatus] = useState(false);
+    const [loguser, setLogUser] = useState("");
+
+
+    useEffect(() => {
+        console.log("sessionStorage.getItem('LogStatus')",
+            sessionStorage.getItem('LogStatus'));
+
+        const logStatus = sessionStorage.getItem('LogStatus') === 'true' ? true : false
+        const logUser = sessionStorage.getItem('Loguser')
+        console.log("zzz", logStatus)
+        setLoginStatus(logStatus)
+        setLogUser(logUser)
+
+
+
+
+    });
     window.addEventListener('resize', showButton);
     return (
         <>
@@ -46,7 +66,15 @@ useEffect(() =>{
                 </Link>
             </li>
 
-            
+            {logStatus ?
+                                <><li className='nav-item'><p  className='nav-links' style={{ "color": "#0d6efd" }}>{loguser}</p></li>
+                                </>
+                               :
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/login">Login</a>
+                                </li>
+
+                            }
 
  
             </ul>
