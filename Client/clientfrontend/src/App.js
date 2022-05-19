@@ -19,6 +19,8 @@ import SimpleMap from './Login/SimpleMap';
 import PaymentGateWay from './Login/PaymentGateWay';
 import emailService from './services/emailService';
 
+import mailer from './contactUs/mailer';
+
 function App() {
   return (
     <div className="App">
@@ -38,7 +40,7 @@ function App() {
           <Route path='/maps' exact component={SimpleMap} />
           <Route path='/payement' exact component={PaymentGateWay} />
           <Route path='/email' exact component={emailService} />
-
+          <Route path="/contactUs" exact component={mailer} />
 
           <Redirect to='/home' />
 
