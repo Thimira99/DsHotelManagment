@@ -45,7 +45,7 @@ export default class reservationDetails extends Component {
             style={{
               marginLeft: "-800px",
               marginTop: "0px",
-              width: "160px",
+              width: "200px",
               height: "50px",
             }}
           >

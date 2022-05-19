@@ -37,6 +37,7 @@ function App() {
           <Route path='/add/hotels' exact component = {createHotels}/>
           <Route path='/edit/hotels/:id' exact component={editHotels}/>
           
+          
           <Redirect to='/login'/>
         </Switch>
 

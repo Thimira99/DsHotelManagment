@@ -107,11 +107,7 @@ export default class RoomManagement extends Component {
             ></input>
           </div>
           <br />
-          
-
-          <button className='btn btn-success'><a href='#' style={{textDecoration:'none',color:'white'}}>
-                        Add a Reservation
-          </a></button>
+         
 
           &nbsp;&nbsp;
           <button className='btn btn-success'><a href='/home' style={{textDecoration:'none',color:'white'}}>
@@ -151,18 +147,6 @@ export default class RoomManagement extends Component {
                                 <td>{rooms.numberOfReservations}</td>
                                 <td>{rooms.price}</td>
                                 
-                                <td>
-                                    <a className='btn btn-warning' href='#' style={{color:'black'}}>
-                                        <i className='fas fa-edit'></i>
-                                        &nbsp;EDIT
-                                    </a>
-                                    &nbsp;
-                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(rooms._id)} style={{ textDecoration: "none", color: "white" }}
-                                        >
-                                        <i className='fas fa-trash-alt'></i>
-                                        &nbsp;REMOVE
-                                    </a>
-                                </td>
                             </tr>
                         ))}
                     </tbody>

@@ -2,6 +2,8 @@ import React, { useState ,useEffect} from 'react'
 import axios from 'axios';
 import { NavLink, useHistory } from "react-router-dom"
 import './clientLoginStyles.css'
+import ClientNavbar from '../ClientNavbar/clientNavbar';
+
 //import login_bg from '../images/login_bg.jpg'
 const Login = () => {
     const history = useHistory();
@@ -51,6 +53,7 @@ const Login = () => {
     return (
         <>
             <div>
+            <ClientNavbar />
                 <div className='container'>
 
                     <div className='card' style={{ marginTop: '100px', backgroundColor: 'rgba(125, 131, 194 , 0.8)' }}>

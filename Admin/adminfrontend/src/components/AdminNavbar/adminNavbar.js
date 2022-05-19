@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
 import './adminNavbar.css';
-
+import bg1 from '../../images/bg1.png'
 
 function AdminNavbar() {
     const [click,setClick]=useState(false);
@@ -47,7 +47,7 @@ const [logStatus, setLoginStatus] = useState(false);
          <div className='navbar-container'>
             
             <Link to="/" className="navbar-logo" onClick = {closeMobileMenu}>
-            <img  style={{width:20}} class=" " src="" alt="" />  ADMIN PANEL</Link>
+            <img  style={{width:50}} class="" src={bg1} alt="bg1" />  ADMIN PANEL</Link>
               
             <div className = 'menu-icon' onClick= {handleClick}>
             

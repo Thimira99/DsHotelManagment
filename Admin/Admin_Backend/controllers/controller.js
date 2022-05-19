@@ -1,5 +1,5 @@
 const Reservations = require('../models/Reservations');
-
+const Payments = require("../models/payment")
 
 
 /*Post reservations*/
@@ -87,12 +87,29 @@ const deleteReservations=async(req,res)=>{
     });
 };
 
+/*Get payments */
+const getPayments= async(req,res)=>{
+    Payments.find().exec((err,payments)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingPayments:payments
+        });
+    });
+    
+}
+
 module.exports={
     getReservations,
     getASpecificReservation,
     postReservations,
     updateReservations,
-    deleteReservations
+    deleteReservations,
+    getPayments
 }
 
 //module.exports=postReservations;

@@ -1,7 +1,7 @@
 import React, { Component , useState, useEffect} from 'react';
 import AdminNavbar from '../AdminNavbar/adminNavbar';
 import Sidebar from '../SideBar/Sidebar';
-import bgImage from '../../images/bgImage.jpg'
+import bg2 from '../../images/bg2.png'
 function Home() {
 
     
@@ -10,8 +10,8 @@ function Home() {
         <div>
             <AdminNavbar/>
             <Sidebar />
-            <div style={{marginLeft:'300px',marginTop:'-500px'}}>
-                <img src={bgImage} alt="bgImage" style={{width:'auto',height:'500px',marginRight:'300px'}}></img>
+            <div style={{marginLeft:'500px',marginTop:'-700px'}}>
+                <img src={bg2} alt="bgImage2" style={{width:'auto',height:'600px',marginRight:'100px'}}></img>
             </div>
             
         </div>
