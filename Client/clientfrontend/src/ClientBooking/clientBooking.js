@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import emailjs from "emailjs-com";
 import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
+import { useParams } from 'react-router-dom';
 
 
 import './clientBooking.css';
@@ -18,6 +19,7 @@ import './clientBooking.css';
 function ClientBooking() {
 
     const history = useHistory();
+    const { id } = useParams();
 
     const [customerName, setCustomerName] = useState("");
     const [reservationType, setReservationType] = useState("");
@@ -28,8 +30,16 @@ function ClientBooking() {
     const [show, setShow] = useState(false);
     const [logEmail, setEmail] = useState("");
     const [logUser, setUser] = useState("");
+    const [hotelObject, setHotel] = useState([]);
+    const [hotelCode, setHotelcode] = useState("");
 
     const handleClose = () => setShow(false);
+
+
+
+
+
+
 
 
 
@@ -164,19 +174,41 @@ function ClientBooking() {
     }
 
     function handleSelect(e) {
-        console.log("inside date select",e)
+        console.log("inside date select", e)
         const firstDate = e ? e[0].toString() : false
 
-        if(firstDate){
-            let firstDates=firstDate.split(' ')
-            console.log("inside date select",firstDates[1])
+        if (firstDate) {
+            let firstDates = firstDate.split(' ')
+            console.log("inside date select", firstDates[1])
         }
-         
-        
+
+
     }
 
 
+
+    useEffect(() => {
+        function getBookingById() {
+            axios.get(`http://localhost:8000/api/client/getHotel/${id}`).then((res) => {
+
+                setHotel(res.data)
+
+                console.log("aaaa", res.data)
+            }).catch((error) => {
+                alert(error)
+            })
+        }
+
+
+        getBookingById();
+    }, [])
+
+
+
+
+console.log("hhhhh",hotelObject)
     return (
+        
         <div>
 
             <>

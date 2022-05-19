@@ -23,10 +23,13 @@ function ClientUpdate() {
                 setReservationType(res.data.data.reservationType);
                 setNumberOfReservations(res.data.data.numberOfReservations);
                 setNumberOfNights(res.data.data.numberOfNights);
+
+                console.log("aaaa",customerName)
             }).catch((error) => {
                 alert(error)
             })
         }
+
 
         getBookingById();
     }, [])
