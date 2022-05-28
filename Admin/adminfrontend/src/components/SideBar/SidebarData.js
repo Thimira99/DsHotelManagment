@@ -2,6 +2,7 @@ import React from 'react'
 import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import RoomServiceIcon from '@material-ui/icons/RoomService';
+import Domain from '@material-ui/icons/Domain'
 import LocalTaxiIcon from '@material-ui/icons/LocalTaxi';
 import PaymentIcon from '@material-ui/icons/Payment';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -16,19 +17,13 @@ export const  SidebarData =  [
     {
         title: "Room Management",
         icon:  <RoomServiceIcon/>,
-        link: "/roomManagement" 
+        link: "/view/rooms" 
     },
 
     {
         title: "Hotel Management",
-        icon:  <RoomServiceIcon/>,
+        icon:  <Domain/>,
         link: "/hotelManagement" 
-    },
-
-    {
-        title: "Taxi Management",
-        icon:  <LocalTaxiIcon/>,
-        link: "/taxiManagement" 
     },
 
     {
@@ -38,9 +33,9 @@ export const  SidebarData =  [
     },
 
     {
-        title: "Notifications",
+        title: "Reservations",
         icon:  <NotificationsIcon/>,
-        link: "/notification" 
+        link: "/reservations" 
     }
     
 

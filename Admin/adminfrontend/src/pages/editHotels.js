@@ -84,14 +84,14 @@ export default class editHotels extends Component {
         <div style={{width:'100%',margin:'40px',borderRadius:'0px',backgroundColor: '#D3D3D3',marginTop:'-30px',marginLeft:'0px'}}>
         <div className="col-md-8 mt-4 mx-auto"><br/><br/><br/>
         <button className="btn btn-danger" style={{width:'160px'}}>
-        <a href="/hotelManagement" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>
+        <a href="/view/rooms" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>
           View Hotels
         </a></button><br/><br/>
 
-    <h1 className="h3 mb-3 font-weight-normal" style={{color:'#B91717',fontWeight:'bolder'}}>Edit the hotel details using the bellow form!</h1>
+    <h1 className="h3 mb-3 font-weight-normal" style={{color:'#B91717',fontWeight:'bolder'}}>Edit the Room details using the bellow form!</h1>
             <form className="needs-validation" noValidate>
                 <div className="form-group" style={{marginBottom:'15px'}}>
-                    <label style={{marginBottom:'5px',fontWeight:'bold',color:'black',fontSize:'20px'}}>Hotel Code</label>
+                    <label style={{marginBottom:'5px',fontWeight:'bold',color:'black',fontSize:'20px'}}>ROOM TYPE</label>
                     <input type="text" className="form-control" name="hotelCode" placeholder="Enter code" value={this.state.hotelCode} onChange={this.handleInputChange} readOnly/>
 
                 </div>

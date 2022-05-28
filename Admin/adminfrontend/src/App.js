@@ -17,6 +17,9 @@ import hotelDetails from './pages/hotelDetails';
 import createHotels from './pages/createHotels';
 import editHotels from './pages/editHotels';
 import reservationDetails from './pages/reservationDetails';
+import createRooms from './pages/createRoom';
+import ViewRooms from './pages/ViewRooms';
+import editRooms from './pages/updateRooms';
 
 function App() {
   return (
@@ -27,7 +30,7 @@ function App() {
         <Switch>
           <Route path='/home' component={Home} />
           <Route path='/login' exact component={Login} />
-          <Route path='/roomManagement' exact component={RoomManagement} />
+          <Route path='/reservations' exact component={RoomManagement} />
           <Route path='/reservations/:id' exact component={reservationDetails}/>
           <Route path='/taxiManagement' exact component={TaxiManagement} />
           <Route path='/payment' exact component={Payment} />
@@ -36,8 +39,10 @@ function App() {
           <Route path='/hotels/:id' exact component={hotelDetails}/>
           <Route path='/add/hotels' exact component = {createHotels}/>
           <Route path='/edit/hotels/:id' exact component={editHotels}/>
-          
-          
+          <Route path='/add/rooms' exact component = {createRooms}/>
+          <Route path='/view/rooms' exact component = {ViewRooms}/>
+          <Route path='/edit/rooms/:id' exact component = {editRooms}/> 
+
           <Redirect to='/login'/>
         </Switch>
 

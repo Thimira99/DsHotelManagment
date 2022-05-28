@@ -1,66 +1,65 @@
 import React, { Component } from 'react';
-import AdminNavbar from '../components/AdminNavbar/adminNavbar'; 
+import AdminNavbar from '../components/AdminNavbar/adminNavbar';
+import Sidebar from '../components/SideBar/Sidebar';
 import axios from 'axios'
 
-export default class RoomManagement extends Component {
+export default class ViewRooms extends Component {
 
     constructor(props){
         super(props);
 
         this.state={
-            rooms:[]
+            rReservations:[]
         };
     }
 
     componentDidMount(){
-        this.retrieveRooms();
+        this.retrieveRoomRes();
     }
 
-    retrieveRooms(){
-        axios.get("http://localhost:8000/api/reservations").then(res=>{
+    retrieveRoomRes(){
+        axios.get("http://localhost:8000/api/get/rooms").then(res=>{
             if(res.data.success){
                 this.setState({
-                    rooms:res.data.existingRooms
+                    rReservations:res.data.existingRooms
                 });
-                console.log(this.state.rooms)
+                console.log(this.state.rReservations)
             }
         });
     }
 
     onDelete = (id) => {
-        if (window.confirm("Do you want to remove this hotel?")) {
-          axios.delete(`http://localhost:8000/api/reservations/delete/${id}`).then((res) => {
-            alert("Hotel removed Successfully!");
-            this.retrieveRooms();
+        if (window.confirm("Do you want to remove this Room?")) {
+          axios.delete(`http://localhost:8000/api/delete/room/${id}`).then((res) => {
+            alert("Room removed Successfully!");
+            this.retrieveRoomRes();
           });
         }
       };
 
        //Search bar
-  filterData(rooms, searchKey) {
-    const result = rooms.filter(
+  filterData(rReservations, searchKey) {
+    const result = rReservations.filter(
       (item) =>
-        item.hotelName.toLowerCase().includes(searchKey) || //toLowerCase() helps to filter the data using the lowercase letters.
-        item.hotelName.toUpperCase().includes(searchKey) || //toUpperCase() helps to filter the data using the Uppercase letters.
-        item.customerName.toUpperCase().includes(searchKey) ||
-        item.customerName.toLowerCase().includes(searchKey)
+        item.roomType.toLowerCase().includes(searchKey) || //toLowerCase() helps to filter the data using the lowercase letters.
+        item.roomType.toUpperCase().includes(searchKey) || //toUpperCase() helps to filter the data using the Uppercase letters.
+        item.hotelName.toUpperCase().includes(searchKey) ||
+        item.hotelName.toLowerCase().includes(searchKey) ||
+        item.roomPrice.toLowerCase().includes(searchKey)
     );
 
-    this.setState({ rooms: result });
+    this.setState({ rReservations: result });
   }
 
   handleSearchArea = (e) => {
     const searchKey = e.currentTarget.value;
 
-    axios.get("http://localhost:8000/api/reservations").then((res) => {
+    axios.get("http://localhost:8000/api/get/rooms").then((res) => {
       if (res.data.success) {
         this.filterData(res.data.existingRooms, searchKey);
       }
     });
   };
-
-
-
 
   render() {
     return (
@@ -87,7 +86,7 @@ export default class RoomManagement extends Component {
                 marginLeft:"100px"
               }}
             >
-              All Reservations
+              All Rooms
             </h4>
           </div>
 
@@ -107,7 +106,11 @@ export default class RoomManagement extends Component {
             ></input>
           </div>
           <br />
-         
+          
+
+          <button className='btn btn-success'><a href='/add/rooms' style={{textDecoration:'none',color:'white'}}>
+                        Add a Room
+          </a></button>
 
           &nbsp;&nbsp;
           <button className='btn btn-success'><a href='/home' style={{textDecoration:'none',color:'white'}}>
@@ -127,34 +130,39 @@ export default class RoomManagement extends Component {
                     <thead>
                         <tr>
                             <th scope='col'>#</th>
+                            <th scope='col'>ROOM TYPE</th>
                             <th scope='col'>HOTEL NAME</th>
-                            <th scope='col'>CUSTOMER NAME</th>
-                            <th scope='col'>RESERVATION TYPE</th>
-                            <th scope='col'>NUMBER OF RESERVATIONS</th>
+                            <th scope='col'>DESCRIPTION</th>
                             <th scope='col'>PRICE</th>
-                            <th scope='col'>FIRST DATE</th>
-                            <th scope='col'>SECOND DATE</th>
-                            <th scope='col'>NUMBER OF DAYS</th>
-                           
+                            <th scope='col'>NUMBER OF BEDS</th>
+                            <th scope='col'>ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.rooms.map((rooms,index)=>(
+                        {this.state.rReservations.map((rReservations,index)=>(
                             <tr>
                                 <th scope='row'>{index+1}</th>
                                 <td>
-                                
-                                 {rooms.hotelName}
-                               
+                                {/* <a href={`/edit/rooms/${rReservations._id}`} style={{textDecoration:'none'}}> */}
+                                 {rReservations.roomType}
+                                {/* </a> */}
                                 </td>
-                                <td>{rooms.customerName}</td>
-                                <td>{rooms.reservationType}</td>
-                                <td>{rooms.numberOfReservations}</td>
-                                <td>{rooms.numberOfNights}</td>
-                                <td>{rooms.roomPrice}</td>
-                                <td>{rooms.firstDate}</td>
-                                <td>{rooms.secondDate}</td>
-                                <td>{rooms.numberOfDays}</td>
+                                <td>{rReservations.hotelName}</td>
+                                <td>{rReservations.description}</td>
+                                <td>{rReservations.roomPrice}</td>
+                                <td>{rReservations.noOfBeds}</td>
+                                <td>
+                                    <a className='btn btn-warning' href={`/edit/rooms/${rReservations._id}`} style={{color:'black'}}>
+                                        <i className='fas fa-edit'></i>
+                                        &nbsp;EDIT
+                                    </a>
+                                    &nbsp;
+                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(rReservations._id)} style={{ textDecoration: "none", color: "white" }}
+                                        >
+                                        <i className='fas fa-trash-alt'></i>
+                                        &nbsp;REMOVE
+                                    </a>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -169,3 +177,5 @@ export default class RoomManagement extends Component {
     )
   }
 }
+
+
