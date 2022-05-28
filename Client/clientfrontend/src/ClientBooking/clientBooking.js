@@ -11,6 +11,8 @@ import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
 import { useParams } from 'react-router-dom';
 
+import SimpleMap from '../Login/SimpleMap';
+
 
 import './clientBooking.css';
 
@@ -22,6 +24,7 @@ function ClientBooking() {
     const { id } = useParams();
 
     const [customerName, setCustomerName] = useState("");
+    const [hotelName, setHotelName] = useState("");
     const [reservationType, setReservationType] = useState("");
     const [numberOfReservations, setNumberOfReservations] = useState();
     const [numberOfNights, setNumberOfNights] = useState();
@@ -32,6 +35,9 @@ function ClientBooking() {
     const [logUser, setUser] = useState("");
     const [hotelObject, setHotel] = useState([]);
     const [hotelCode, setHotelcode] = useState("");
+    const [firstDate, setfirstDate] = useState("");
+    const [secondDate, setsecondDate] = useState("");
+    const [numberOfDays, setNumberofDates] = useState("");
 
     const handleClose = () => setShow(false);
 
@@ -52,13 +58,23 @@ function ClientBooking() {
             history.push("/login")
             return -1;
         }
+
+        const numberOfDays = "12"
+        const hotelName = hotelObject.hotelName
+        const email = logEmail
         const newCustomer = {
+            hotelName,
             customerName,
+            email,
             reservationType,
             numberOfReservations,
             numberOfNights,
-            roomPrice
+            roomPrice,
+            firstDate,
+            secondDate,
+            numberOfDays
         }
+
         const URL = 'http://localhost:8000/api/roomReservations/post';
         axios.post(URL, newCustomer).then(() => {
             alert("Cusomer Added")
@@ -176,10 +192,29 @@ function ClientBooking() {
     function handleSelect(e) {
         console.log("inside date select", e)
         const firstDate = e ? e[0].toString() : false
+        const SecondDate = e ? e[1].toString() : false
 
         if (firstDate) {
             let firstDates = firstDate.split(' ')
-            console.log("inside date select", firstDates[1])
+            let secondDate = SecondDate.split(' ')
+
+            const fmonth = firstDates[1]
+            const fday = firstDates[2]
+            const fyear = firstDates[3]
+
+            setfirstDate(fmonth + "/" + fyear)
+            console.log("inside date select", fmonth + fday + fyear)
+
+            const smonth = secondDate[1]
+            const sday = secondDate[2]
+            const syear = secondDate[3]
+
+            setsecondDate(smonth + "/" + syear)
+            console.log("inside date 2 select", smonth, sday, syear)
+
+
+
+
         }
 
 
@@ -206,10 +241,11 @@ function ClientBooking() {
 
 
 
-console.log("hhhhh",hotelObject)
+    console.log("hhhhh", hotelObject)
     return (
-        
+
         <div>
+
 
             <>
 
@@ -312,142 +348,173 @@ console.log("hhhhh",hotelObject)
                     <button className='btn btn-primary'>View Room Details</button>
                 </div>
 
+                <div className='mainBody'>
+                    <div className='hotelDetails'>
+                        <div className='hotelTitle'>
+                            <img src={hotelObject.imageUrl} />
+                            <h2>{hotelObject.hotelName}</h2>
+                            <h4>Hotel Code: {hotelObject.hotelCode}</h4>
+                            <h4>Hotel Description: <h4>{hotelObject.description}</h4></h4>
+
+                        </div>
+                        <div className='map'>
+                            <SimpleMap />
+                        </div>
 
 
+                    </div>
+                    <div className='mainForm'>
+                        <form >
 
-
-
-
-
-
-                <div className='mainForm'>
-                    <form >
-
-                        <Row >
-                            <div className="form-group md-6">
-                                <label for="customerName">Customer Name:</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="customerName"
-                                    placeholder="Enter Name"
-                                    onChange={(e) => {
-                                        setCustomerName(e.target.value);
-                                    }} />
-                            </div>
-
-                        </Row>
-
-                        <Row>
-
-                            <div className="form-group">
-                                <label for="reservationType">Reservation Type:</label>
-                                <select
-                                    id="reservationType"
-                                    className="form-control"
-                                    onChange={
-                                        handleSelectChange
-                                    }>
-                                    <option selected disabled>Choose...</option>
-                                    <option>Standard</option>
-                                    <option>Deluxe</option>
-                                    <option>Luxury</option>
-                                </select>
-                            </div>
-
-                        </Row>
-
-                        <Row>
-
-
-                            <div className="form-group ">
-                                <label for="numberOfReservations">Number Of Reservations:</label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    id="numberOfReservations"
-                                    placeholder="Enter Number Of Reservations"
-                                    onChange={(e) => {
-                                        setNumberOfReservations(e.target.value);
-                                    }}
-                                />
-                            </div>
-
-                        </Row>
-
-                        <Row>
-
-                            <div className="form-group md-6">
-                                <label for="numberOfNights">Number Of Nights:</label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    id="numberOfNights"
-                                    placeholder="Enter Name"
-                                    onChange={(e) => {
-                                        setNumberOfNights(e.target.value);
-                                    }}
-                                />
-                            </div>
-
-                        </Row>
-
-                        <Row>
-                            <label for="numberOfNights">Dates:</label>
-                            <DateRangePicker
-
-                                onChange={(value) => {
-                                    handleSelect(value);
-                                }}
-
-                            />
-
-                        </Row>
-
-                        <Row>
-
-                            <Col xs={2}>
-
-                                <div className='submitButton'>
-                                    <button type="submit" onClick={sendDetails} className="btn btn-primary">Submit</button>
+                            <Row >
+                                <div className="form-group md-6">
+                                    <label for="customerName">Hotel Name:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="customerName"
+                                        placeholder="Enter Name"
+                                        value={hotelObject.hotelName}
+                                        onChange={(e) => {
+                                            setHotelName(e.target.value);
+                                        }} />
                                 </div>
 
-                            </Col>
+                            </Row>
 
-                            <Col xs={3}>
 
-                                {LoginStatus &&
+
+
+
+                            <Row >
+                                <div className="form-group md-6">
+                                    <label for="customerName">Customer Name:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="customerName"
+                                        placeholder="Enter Name"
+                                        onChange={(e) => {
+                                            setCustomerName(e.target.value);
+                                        }} />
+                                </div>
+
+                            </Row>
+
+                            <Row>
+
+                                <div className="form-group">
+                                    <label for="reservationType">Reservation Type:</label>
+                                    <select
+                                        id="reservationType"
+                                        className="form-control"
+                                        onChange={
+                                            handleSelectChange
+                                        }>
+                                        <option selected disabled>Choose...</option>
+                                        <option>Standard</option>
+                                        <option>Deluxe</option>
+                                        <option>Luxury</option>
+                                    </select>
+                                </div>
+
+                            </Row>
+
+                            <Row>
+
+
+                                <div className="form-group ">
+                                    <label for="numberOfReservations">Number Of Reservations:</label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        id="numberOfReservations"
+                                        placeholder="Enter Number Of Reservations"
+                                        onChange={(e) => {
+                                            setNumberOfReservations(e.target.value);
+                                        }}
+                                    />
+                                </div>
+
+                            </Row>
+
+                            <Row>
+
+                                <div className="form-group md-6">
+                                    <label for="numberOfNights">Number Of Nights:</label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        id="numberOfNights"
+                                        placeholder="Enter Name"
+                                        onChange={(e) => {
+                                            setNumberOfNights(e.target.value);
+                                        }}
+                                    />
+                                </div>
+
+                            </Row>
+
+                            <Row style={{ "margin-top": "10px" }}>
+                                <label for="numberOfNights">Accomadation Dates:</label>
+                                <DateRangePicker
+
+                                    onChange={(value) => {
+                                        handleSelect(value);
+                                    }}
+
+                                />
+
+                            </Row>
+
+                            <Row>
+
+                                <Col xs={2}>
+
                                     <div className='submitButton'>
-                                        <button type="submit" onClick={setPayNow} className="btn btn-primary">PayNow</button>
+                                        <button type="submit" onClick={sendDetails} className="btn btn-primary">Submit</button>
                                     </div>
 
+                                </Col>
 
-                                }
+                                <Col xs={3}>
 
-
-                            </Col>
-
-                            <Col>
-
-                                <p style={{ "font-family": "Montserrat,Verdana,Helvetica,Arial,sans-serif", "font-size": "23px", "marginTop": "20px", "margin-left": "160px" }}>Rs {roomPrice}</p>
-
+                                    {LoginStatus &&
+                                        <div className='submitButton'>
+                                            <button type="submit" onClick={setPayNow} className="btn btn-primary">PayNow</button>
+                                        </div>
 
 
-                            </Col>
+                                    }
 
 
+                                </Col>
 
+                                <Col>
 
-                        </Row>
-
-
+                                    <p style={{ "font-family": "Montserrat,Verdana,Helvetica,Arial,sans-serif", "font-size": "23px", "marginTop": "20px", "margin-left": "160px" }}>Rs {roomPrice}</p>
 
 
 
+                                </Col>
 
 
-                    </form>
+
+
+                            </Row>
+
+
+
+
+
+
+
+                        </form>
+                    </div>
                 </div>
+
+
+
             </div>
 
         </div>

@@ -8,6 +8,7 @@
     margin-top: 2rem;
     background-color: rgb(127, 127, 149);
     width: 40%;
+    height: 500px;
     padding: 1rem 1rem 1rem 1rem;
 }
 
@@ -28,6 +29,7 @@
 .submitButton {
     margin-top: 1rem;
 }
+
 .rs-picker-default .rs-picker-toggle.rs-btn {
     padding-top: 7px;
     padding-bottom: 7px;
@@ -46,6 +48,7 @@
     border: 1px solid #e5e5ea;
     padding-left: 44px;
 }
+
 /* calander align */
 .rs-picker-toggle-caret {
     display: inline-block;
@@ -58,13 +61,13 @@
 }
 
 /* ok button style */
-.rs-picker-toolbar-right-btn-ok { 
-    text-align: center; 
+.rs-picker-toolbar-right-btn-ok {
+    text-align: center;
     cursor: pointer;
-    outline: 0 ; 
-    border: none; 
-    padding: 8px 12px; 
-    font-size: 14px; 
+    outline: 0;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
     border-radius: 30px;
     color: #fff;
     background-color: #3498ff;
@@ -77,4 +80,35 @@
     padding-right: 0;
     border-radius: 21px;
     display: inline-block;
+}
+
+.hotelDetails {
+    margin-top: 3rem;
+    margin-left: 3rem;
+    width: 500px;
+    border: 1px solid black;
+}
+
+.hotelDetails img {
+    width: 500px;
+    height: 300px;
+    padding: 1rem;
+}
+
+.hotelDetails h2 {
+    text-align: center;
+    background-color: rgb(188, 188, 188);
+}
+
+.map {
+    border: 2px solid black;
+    padding: 1rem;
+    margin: 1rem 1rem 2rem 1rem;
+}
+
+.mainBody {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    flex-basis: 30% 20%;
 }
