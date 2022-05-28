@@ -101,9 +101,8 @@
 }
 
 .map {
-    border: 2px solid black;
+    border: 1px solid black;
     padding: 1rem;
-    margin: 1rem 1rem 2rem 1rem;
 }
 
 .mainBody {
@@ -111,4 +110,39 @@
     flex-direction: row-reverse;
     justify-content: left;
     flex-basis: 30% 20%;
+}
+
+.firstSection {
+    border: 1px solid black;
+}
+
+.firstSection img {
+    width: 1520px;
+    height: 800px;
+    filter: blur(3px);
+}
+
+.bg-text {
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+}
+
+.secondSection {
+    border: 2px solid black;
+    background-color: rgb(209, 209, 218);
+}
+
+.secondSection .mainOne {
+    padding: 10px;
 }
