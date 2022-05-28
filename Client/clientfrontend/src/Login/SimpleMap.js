@@ -3,8 +3,6 @@ import {
   GoogleMap,
   useLoadScript,
   Marker,
-  InfoWindow,
-  MarkerClusterer,
 } from '@react-google-maps/api';
 
 import Modal from 'react-bootstrap/Modal';
@@ -17,9 +15,10 @@ const mapContainerStyle = {
   height: '60vh',
 };
 const center = {
-  lat: 6.9108,
+  lat: 10.9108,
   lng: 79.8634,
 };
+
 const options = {
   zoomControl: true,
 };
@@ -40,26 +39,38 @@ const circleOptions = {
 
 
 
-export default function SimpleMap() {
+export default function SimpleMap(data) {
+
+  center.lat = Number(data.lat);
+  center.lng = Number(data.lng);
+
+
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyBltgxLK8Nz-TI7IDzaRjXTxGIoO8QHCgI",
     libraries,
   });
 
-  
+
 
 
 
   const renderMap = () => {
+
+    const lat = center.lat;
+    const lng = center.lng;
+
     return (
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14}
         options={options}
         center={center}
-       >
+      >
+
+
         <Circle center={center} options={circleOptions} />
-        {<Marker position={{ lat:6.9108, lng: 79.8634 }} />}
+        {<Marker position={{ lat, lng }} />}
       </GoogleMap>
     );
   };
@@ -71,21 +82,7 @@ export default function SimpleMap() {
 
   return (
     <>
-      <div>{renderMap()}</div>
-      {/* <Modal
-        show={showModal}
-        onHide={handleModalClose}
-        backdrop="static"
-        keyboard={false}
-        centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Address is out of bounds</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Sorry ! We Dont Deliver Food In Your Area .</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleModalClose}>Choose New Address</Button>
-        </Modal.Footer>
-      </Modal> */}
+      <div>{renderMap(center.lat, center.lng)}</div>
     </>
   );
 }
