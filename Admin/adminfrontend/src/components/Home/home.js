@@ -13,10 +13,6 @@ function Home() {
             <div style={{marginLeft:'500px'}}>
 
                 {/* <img src={bg2} alt="bgImage2" style={{width:'auto',height:'600px',marginRight:'100px',marginTop:'-500px'}}></img> */}
-                <div style={{
-                }}>
-
-                {/* <img src={bg2} alt="bgImage2" style={{width:'auto',height:'600px',marginRight:'100px'}}></img> */}
                 <div>
 
                 <form method="">
@@ -31,7 +27,7 @@ function Home() {
                                          backgroundSize: "cover",
                                          background:"rgba(0,0,0,0.6)",
                                          height:'600px',
-
+                        }}>
                        
                             <div className="profile-head">
 
@@ -45,32 +41,15 @@ function Home() {
                                 <h2 className="h2" style={{fontWeight:"bolder",color:'white',textAlign:'center'}}>Inside Shangri-La Circle</h2>
                                 <p className="para" style={{fontWeight:"bold"}}>
 
-                                        //  backgroundImage: `url(${bg2})`,
-                                        //  backgroundSize: "cover",
-                                        //  backgroundColor:"rgba(0,0,0,0.6)",
-                                        //  marginTop:'-40px',
-                                        //  width:'100%',
-                                        //  marginLeft:'-50px'
-                                     }}>
                                      <br/>
-                                <h2 className="h2" style={{fontWeight:"bolder",color:'white',textAlign:'center'}}>Inside Shangri-La Circle</h2>
-                                <p className="para" style={{fontWeight:"bold",color:'black'}}>
-
 
                                     <br/>
                                     A personal tropical sanctuary that is perfect for escaping the city, 
                                     Shangri-La Circle overlooks the Indian Ocean in the heart of the business district with 
-
                                     direct access to the most extensive accommodations in Sri Lanka, The hotel offers the finest 
                                     accommodation in Colombo, an exciting new offers 
                                     and social 
                                     scene and the largest and extensive hotel facilities.
-                                    <hr/>
-                                    
-
-                                    direct access to the most extensive international hotels in Sri Lanka.The hotel offers the finest accommodations in Sri Lanka, 
-                                    an exciting new offers and social scene and the largest and extensive hotel conference facilities.
-                                    
                                     <hr/>
 
                                     </p>
@@ -89,8 +68,6 @@ function Home() {
 
                                         <p className="box1p2">“TO CREATE DELIGHTED LIFE-TIME CUSTOMERS & <br/> LIFETIME DELIGHTED DEALERS"</p>
 
-                                        <p className="box1p2">“TO CREATE DELIGHTED LIFE-TIME CUSTOMERS & <br/> LIFETIME DELIGHTED CONTRACTORS</p>
-
                                     </div>
                                 </div>
 
@@ -102,10 +79,11 @@ function Home() {
 
                         </div>
                     </div>
-
+                    
                 </form>
             </div>
-            </div>
+           
+        </div>
         </div>
     )
 }
