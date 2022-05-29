@@ -1,6 +1,6 @@
 const express = require('express')
 const { getRoomReservations, postRoomReservations, updateRoomReservations, deleteRoomReservations, getRoomReservationsById } = require('../controllers/controllers')
-const { postClientRegistration, getAllClients, updateClient, deleteClient, clientLogin, getfillter } = require('../controllers/clientController')
+const { postClientRegistration, getAllClients, updateClient, deleteClient, clientLogin, getfillter, messageService } = require('../controllers/clientController')
 const { getPayment, postPayment, deletePayment, getPaymentById } = require('../controllers/paymentController')
 
 const { getHotels, getHotelById } = require('../controllers/hotelController')
@@ -9,6 +9,7 @@ const { getHotels, getHotelById } = require('../controllers/hotelController')
 const router = express.Router()
 
 const roomReservation = require('../models/roomReservations')
+const { default: emailService } = require('../../clientfrontend/src/services/emailService')
 
 router.get("/roomReservations", getRoomReservations)
 router.post("/roomReservations/post", postRoomReservations)
@@ -35,6 +36,9 @@ router.post("/filter", getfillter)
 /*hotel Client routes */
 router.get("/client/get/hotels", getHotels)
 router.get("/client/getHotel/:id", getHotelById)
+
+// Message Service
+router.post("/message", messageService )
 
 
 module.exports = router

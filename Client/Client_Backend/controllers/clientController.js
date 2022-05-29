@@ -90,25 +90,25 @@ const deleteClient = async (req, res) => {
 
 }
 
-//  /**Login */
+// Login & Twilio Message Service 
 const clientLogin = async (req, res) => {
     let client1 = new clientRegistartion (req.body);
 
-    var sid = 'ACb587b699915ef2007afe88b568aa5977';
-    var auth_token = '5d8055f9fb2f90f41ae42196d4cbd724';
+    // var sid = 'ACb587b699915ef2007afe88b568aa5977';
+    // var auth_token = '5d8055f9fb2f90f41ae42196d4cbd724';
 
-    var twilio = require("twilio")(sid, auth_token);
+    // var twilio = require("twilio")(sid, auth_token);
 
-    twilio.messages
-        .create({
-            from: "+12055573949",
-            to: "+94711333900",
-            body: "Welcome to Shangi-La-Circle hotel. This is the testing message for our message API.(2022S1_REG_99: Dodanduwa D.L.H.S.D,Senarathna P.P, Amarakoon G.A.M.T.S.B, Pigera A.I.H)",
-        })
-        .then(function (res) { console.log("message has sent!") })
-        .catch(function (err) {
-            console.log(err);
-        });
+    // twilio.messages
+    //     .create({
+    //         from: "+12055573949",
+    //         to: "+94711333900",
+    //         body: "Welcome to Shangi-La-Circle hotel. This is the testing message for our message API.(2022S1_REG_99: Dodanduwa D.L.H.S.D,Senarathna P.P, Amarakoon G.A.M.T.S.B, Pigera A.I.H)",
+    //     })
+    //     .then(function (res) { console.log("message has sent!") })
+    //     .catch(function (err) {
+    //         console.log(err);
+    //     });
 
 
 
@@ -129,6 +129,25 @@ const clientLogin = async (req, res) => {
     console.log(clientRegistartion)
 }
 
+const messageService = async (req, res) => {
+    var sid = 'ACb587b699915ef2007afe88b568aa5977';
+    var auth_token = '5d8055f9fb2f90f41ae42196d4cbd724';
+
+    var twilio = require("twilio")(sid, auth_token);
+
+    twilio.messages
+        .create({
+            from: "+12055573949",
+            to: "+94711333900",
+            body: "Welcome to Shangi-La-Circle hotel. This is the testing message for our message API.(2022S1_REG_99: Dodanduwa D.L.H.S.D,Senarathna P.P, Amarakoon G.A.M.T.S.B, Pigera A.I.H)",
+        })
+        .then(function (res) { console.log("message has sent!") })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+}
+
 
 module.exports = {
     postClientRegistration,
@@ -136,5 +155,6 @@ module.exports = {
     updateClient,
     deleteClient,
     clientLogin,
-    getfillter
+    getfillter,
+    messageService
 }
