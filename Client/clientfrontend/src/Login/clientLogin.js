@@ -3,6 +3,7 @@ import axios from 'axios';
 import { NavLink, useHistory } from "react-router-dom"
 import './clientLoginStyles.css'
 import ClientNavbar from '../ClientNavbar/clientNavbar';
+import bg2 from '../images/bg2.png'
 
 //import login_bg from '../images/login_bg.jpg'
 const Login = () => {
@@ -52,11 +53,20 @@ const Login = () => {
 
     return (
         <>
-            <div>
+            <div
+             style={{ 
+        backgroundImage: `url(${bg2})`,
+        //backgroundSize: "cover",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        width:'auto',
+        height:'680px',
+        
+    }}>
             <ClientNavbar />
                 <div className='container'>
 
-                    <div className='card' style={{ marginTop: '100px', backgroundColor: 'rgba(125, 131, 194 , 0.8)' }}>
+                    <div className='card' style={{ marginTop: '100px', backgroundColor: 'rgba(9, 24, 75, 0.8)', width:'750px',marginLeft:'200px' }}>
 
                         <div className='login'>
 
@@ -81,7 +91,7 @@ const Login = () => {
                                 </div>
                                 <br />
                                 <div className="login-btn">
-                                    <button className="btn btn-outline-dark" type="submit" onClick={loginUser} >
+                                    <button className="btn btn-outline-light" type="submit" onClick={loginUser} style={{marginLeft:'-200px'}} >
                                         Login
                                     </button>
                                 </div>
@@ -89,7 +99,7 @@ const Login = () => {
                         </div>
                         <br />
                         <div className='register'>
-                            <a href="/JoinNow" target="_blank" class="inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white" style={{ textDecoration: 'none' }}>
+                            <a href="/JoinNow" target="_blank" class="inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white" style={{ textDecoration: 'none', color:'white',marginLeft:'-150px' }}>
                                 <span class="ml-2">
                                     You don't have an account?
                                 </span>
