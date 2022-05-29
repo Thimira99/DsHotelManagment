@@ -73,11 +73,31 @@ const getRoomReservationsById = async (req, res) => {
 
 }
 
+const getbyDatebySennder = async (req, res) => {
+
+
+    const {email } = req.body;
+
+    // message.find().sort({'timestamp': -1 })
+
+   roomReservations.find({ email: email}, (err, Msg) => {
+        if (Msg) {
+            
+
+                return res.status(200).json({ message: "Message Retrived", data: Msg })
+           
+        } else {
+            return res.status(400).json({ error: "Message not Retrived" })
+        }
+    })
+}
+
 
 module.exports = {
     getRoomReservations,
     postRoomReservations,
     updateRoomReservations,
     deleteRoomReservations,
-    getRoomReservationsById
+    getRoomReservationsById,
+    getbyDatebySennder
 }
