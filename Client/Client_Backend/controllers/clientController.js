@@ -130,11 +130,13 @@ const clientLogin = async (req, res) => {
 }
 
 
+
 module.exports = {
     postClientRegistration,
     getAllClients,
     updateClient,
     deleteClient,
     clientLogin,
-    getfillter
+    getfillter,
+
 }

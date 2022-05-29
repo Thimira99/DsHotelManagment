@@ -53,6 +53,12 @@ const roomReservationSchema = new Schema({
         required:true,
         trim:true
     },
+    paymentStatus:{
+        type:String,
+        required:true,
+        trim:true
+    },
+   
    
 },{timestamps:true})
 

@@ -1,6 +1,6 @@
 const express = require('express')
-const { getRoomReservations, postRoomReservations, updateRoomReservations, deleteRoomReservations, getRoomReservationsById } = require('../controllers/controllers')
-const { postClientRegistration, getAllClients, updateClient, deleteClient, clientLogin, getfillter } = require('../controllers/clientController')
+const { getRoomReservations, postRoomReservations, updateRoomReservations, deleteRoomReservations, getRoomReservationsById , getbyDatebySennder } = require('../controllers/controllers')
+const { postClientRegistration, getAllClients, updateClient, deleteClient, clientLogin, getfillter  } = require('../controllers/clientController')
 const { getPayment, postPayment, deletePayment, getPaymentById } = require('../controllers/paymentController')
 
 const { getHotels, getHotelById } = require('../controllers/hotelController')
@@ -15,12 +15,14 @@ router.post("/roomReservations/post", postRoomReservations)
 router.put("/roomReservation/update/:id", updateRoomReservations)
 router.delete("/roomReservation/delete/:id", deleteRoomReservations)
 router.get("/roomReservations/:id", getRoomReservationsById)
+router.post("/roomReservations/get", getbyDatebySennder)
 
 /*client registration */
 router.post("/clientregister/post", postClientRegistration)
 router.get("/clientregister", getAllClients)
 router.put("/clientregister/update/:id", updateClient)
 router.delete("/clientregister/delete/:id", deleteClient)
+
 
 /*Payment */
 router.post("/payment/post", postPayment)
