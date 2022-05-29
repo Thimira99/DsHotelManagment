@@ -146,3 +146,19 @@
 .secondSection .mainOne {
     padding: 10px;
 }
+
+.fourthSection .cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 20rem;
+}
+
+.fourthSection body {
+    margin-top: 2rem;
+    width: 800px;
+}
+
+.fourthSection h1 {
+    margin-bottom: 2rem;
+}
