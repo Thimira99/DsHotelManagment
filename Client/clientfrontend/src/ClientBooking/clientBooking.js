@@ -39,6 +39,8 @@ function ClientBooking() {
     const [secondDate, setsecondDate] = useState("");
     const [numberOfDays, setNumberofDates] = useState("");
 
+    const [hotelRooms, setHotelRooms] = useState([]);
+
     const handleClose = () => setShow(false);
 
 
@@ -229,22 +231,29 @@ function ClientBooking() {
                 setHotel(res.data)
 
                 console.log("aaaa", res.data)
+                localStorage.setItem('Hhname', res.data.hotelName);
             }).catch((error) => {
                 alert(error)
             })
         }
 
+        console.log()
+
+        const hName = localStorage.getItem('Hhname');
+        axios.get(`http://localhost:8000/api/get/rooms/${hName}`).then(res => {
+            setHotelRooms(res.data[0])
+        }).catch((error) => {
+            console.log(error);
+        })
 
         getBookingById();
     }, [])
 
-
-
-
-
-    console.log("hhhhh", hotelObject)
     const hLat = hotelObject.latitude;
     const hlng = hotelObject.longitude;
+
+    const img1 = hotelRooms.image1Url;
+    console.log(img1);
 
     console.log("Mpa" + hLat, hlng);
     return (
@@ -355,6 +364,39 @@ function ClientBooking() {
                     <h1 style={{ fontSize: "50px" }}>{hotelObject.description}</h1>
                 </div>
             </div>
+            <div className='fourthSection'>
+                <h1>Rooms</h1>
+                <div className='cards'>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={hotelRooms.image1Url} />
+                        <Card.Body>
+                            <Card.Title>Card Title</Card.Title>
+                            <Card.Text>
+                                {hotelRooms.description}
+                            </Card.Text>
+                        </Card.Body>
+                    </Card><Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={hotelRooms.image2Url} />
+                        <Card.Body>
+                            <Card.Title>Card Title</Card.Title>
+                            <Card.Text>
+                                {hotelRooms.description}
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={hotelRooms.image3Url} />
+                        <Card.Body>
+                            <Card.Title>Card Title</Card.Title>
+                            <Card.Text>
+                                {hotelRooms.description}
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </div>
+
+            </div>
+
             <div className='secondSection'>
                 <div className='mainOne'>
                     <h1>Bookings</h1>
@@ -522,8 +564,9 @@ function ClientBooking() {
 
 
             </div>
+
         </div>
-    
+
 
     )
 }
