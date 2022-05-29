@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 function ViewClientBooking() {
 
     const [customer, setCustomer] = useState([]);
+    const [logUser , setLogUser] = useState([]);
     const URL = 'http://localhost:8000/api/roomReservations';
 
     function getCustomers() {
         axios.get(URL).then((res) => {
-            setCustomer(res.data.data);
+            
         }).catch((err) => {
             alert(err)
         })
@@ -26,17 +27,37 @@ function ViewClientBooking() {
     }
 
     useEffect(() => {
-        function getBookings() {
-            axios.get(URL).then((res) => {
-                setCustomer(res.data.data)
-            }).catch((error) => {
-                alert(error);
-            })
 
+        const logUser = sessionStorage.getItem('LogEmail')
+        setLogUser(logUser)
+        const data = {
+            "email" : logUser
         }
 
-        getBookings();
-        console.log(customer)
+        axios.post('http://localhost:8000/api/roomReservations/get',data).then((res) => {
+            
+            console.log("res",res)
+            setCustomer(res.data.data);
+
+
+        }).catch((error) => {
+            alert(error)
+        })
+
+
+
+
+        // function getBookings() {
+        //     axios.get(URL).then((res) => {
+        //         setCustomer(res.data.data)
+        //     }).catch((error) => {
+        //         alert(error);
+        //     })
+
+        // }
+
+        // getBookings();
+        // console.log(customer)
     }, [])
 
 

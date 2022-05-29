@@ -149,6 +149,7 @@ const messageService = async (req, res) => {
 }
 
 
+
 module.exports = {
     postClientRegistration,
     getAllClients,
@@ -156,5 +157,9 @@ module.exports = {
     deleteClient,
     clientLogin,
     getfillter,
+
+
+
     messageService
+
 }

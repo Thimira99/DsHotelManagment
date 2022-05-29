@@ -38,6 +38,9 @@ function ClientBooking() {
     const [firstDate, setfirstDate] = useState("");
     const [secondDate, setsecondDate] = useState("");
     const [numberOfDays, setNumberofDates] = useState("");
+    const [Days, setDays] = useState([]);
+
+
 
     const handleClose = () => setShow(false);
 
@@ -72,7 +75,7 @@ function ClientBooking() {
             roomPrice,
             firstDate,
             secondDate,
-            numberOfDays
+            numberOfDays,
         }
 
         const URL = 'http://localhost:8000/api/roomReservations/post';
@@ -211,11 +214,71 @@ function ClientBooking() {
 
             setsecondDate(smonth + "/" + syear)
             console.log("inside date 2 select", smonth, sday, syear)
-
-
-
-
         }
+
+        // var date1 = new Date(e[0]);
+        // var date2 = new Date(e[1]);
+
+
+        // var firstdate = (date1.getFullYear() + "/" + date1.getMonth());
+        // var seconddate = (date2.getFullYear() + "/" + date2.getMonth());
+
+        // if (firstdate === seconddate) {
+
+        //     setDays([])
+        //     console.log("inside true")
+
+        //     const noDays = (date2.getDate() - date1.getDate()) + 1
+        //     console.log("no of", noDays)
+
+        //     var fDate = date1.getDate();
+        //     var sDate = date2.getDate();
+
+        //     for (fDate; fDate <= sDate; fDate++) {
+        //         console.log("no +", fDate)
+        //         if (Days.indexOf(fDate) === -1) {
+        //             Days.push(fDate)
+        //         }
+        //         setDays(Days);
+        //     }
+
+        // } else {
+
+        //     setDays([]);
+
+        //     var fDate = date1.getDate();
+        //     var sDate = date2.getDate(); 
+
+        //     console.log("inside false")
+        //     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        //     const firstDate = new Date(e[0]);
+        //     const secondDate = new Date(e[1]);
+
+        //     const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+        //     console.log("inside false 2",diffDays+1)
+            
+        //     for (var num =1 ; num <= diffDays; num++) {
+        //         if(fDate)
+        //         console.log("no +", ++fDate)
+        //         if (Days.indexOf(fDate) === -1) {
+        //             Days.push(fDate)
+        //         }
+        //         setDays(Days);
+        //     }
+
+            
+        // }
+
+
+        // console.log("day",Days)
+
+
+        // console.log("Date Timestamp:", date2.getTime())
+        // console.log(date2)
+        // console.log("Date: "
+        //     (date2.getMonth() + 1) +
+        //     "/" + date2.getFullYear());
+
 
 
     }
@@ -242,7 +305,7 @@ function ClientBooking() {
 
 
 
-    console.log("hhhhh", hotelObject)
+    console.log("1", Days)
     const hLat = hotelObject.latitude;
     const hlng = hotelObject.longitude;
 
@@ -523,7 +586,7 @@ function ClientBooking() {
 
             </div>
         </div>
-    
+
 
     )
 }
