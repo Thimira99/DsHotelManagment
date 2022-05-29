@@ -18,6 +18,7 @@ const Mailer = () => {
           .then((res) => {
             console.log(res);
             alert('Message Sent Successfully!');
+            window.location.reload();
           })
           .catch((err) => console.log(err));
       }
