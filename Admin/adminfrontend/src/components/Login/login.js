@@ -1,5 +1,7 @@
 import React, { useState ,useEffect} from 'react';
 import {useHistory } from 'react-router-dom';
+import AdminNavbar from '../AdminNavbar/adminNavbar';
+import bg2 from '../../images/bg2.png'
 
 import './login.css'
 
@@ -47,14 +49,27 @@ useEffect(() => {
 });
 
 return (
-    <>
-        <div>
+    <div 
+        style={{ 
+        backgroundImage: `url(${bg2})`,
+        //backgroundSize: "cover",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        width:'auto',
+        height:'680px',
         
-            <div className='container'>
+    }}>
+    <AdminNavbar/>
+        <div>
 
-                <div className='card' style={{ marginTop: '100px', backgroundColor: 'rgba(89, 94, 185 , 0.8)' }}>
+            <div className='container' style={{
+            
+               
+        }}>
 
-                    <div className='login'>
+                <div className='card' style={{ marginTop: '100px', backgroundColor: 'rgba(9, 24, 75, 0.8)', width:'750px',marginLeft:'200px' }}>
+
+                    <div className='login' style={{marginLeft:'-150px'}}>
 
                         <h1 className='h1'>Login To Your Account</h1>
 
@@ -65,13 +80,13 @@ return (
                             <div class="flex flex-col mb-2">
                                 <div class="flex relative ">
 
-                                    <label style={{ color: "Black", fontSize: "20px" }}>Email</label>
+                                    <label style={{ color: "#D7D9DF ", fontSize: "20px", fontWeight:'bold' }}>Email</label>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="sign-in-email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email" style={{ backgroundColor: "rgba(180, 181, 187, 0.5)", color: "white", border: 'none' }} />
                                 </div>
                             </div>
                             <div class="flex flex-col mb-6">
                                 <div class="flex relative ">
-                                    <label style={{ color: "Black", fontSize: "20px" }}>Password</label>
+                                    <label style={{ color: "#D7D9DF ", fontSize: "20px" , fontWeight:'bold'}}>Password</label>
                                     &nbsp;&nbsp; <input type="password" id="sign-in-email" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Your password" style={{ backgroundColor: "rgba(180, 181, 187, 0.5)", color: "white", border: 'none' }} />
                                 </div>
                             </div>
@@ -88,7 +103,7 @@ return (
                 </div>
             </div>
         </div>
-    </>
+    </div>
 )
 }
 
