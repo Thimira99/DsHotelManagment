@@ -8,8 +8,8 @@ const { getHotels, getHotelById } = require('../controllers/hotelController')
 
 const router = express.Router()
 
-const roomReservation = require('../models/roomReservations')
-const { default: emailService } = require('../../clientfrontend/src/services/emailService')
+// const roomReservation = require('../models/roomReservations')
+// const { default: emailService } = require('../../clientfrontend/src/services/emailService')
 
 router.get("/roomReservations", getRoomReservations)
 router.post("/roomReservations/post", postRoomReservations)

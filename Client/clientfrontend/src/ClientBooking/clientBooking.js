@@ -135,6 +135,25 @@ function ClientBooking() {
 
     }
 
+    function sendMessage(e) {
+        const form = {
+            "name": logUser,
+            "paymentId": e.id,
+            "cusName": customerName,
+            "noDays": numberOfNights,
+            "noRes": numberOfReservations,
+            "roomType": reservationType,
+            "payment": roomPrice
+
+        }
+
+        axios.post('http://localhost:8000/api/message', form).then((res) => {
+            console.log("abc", res)
+        })
+        
+
+    }
+
     function sendMail(e) {
         console.log("eeeee", e)
         console.log("eeeee 1", logUser)
@@ -290,6 +309,7 @@ function ClientBooking() {
                                             )
 
                                             sendMail(details);
+                                            sendMessage(details);
 
 
 
